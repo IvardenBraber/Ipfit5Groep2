@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-
+#import case
+#case_1 = case('Henk',10,1,1)
 
 gui = Tk()
 gui.geometry("600x550")
@@ -51,5 +52,11 @@ e.place(x=195, y=430)
 f = ttk.Button(gui, text="Go Back", width=7)
 f.place(x=120, y=430)
 
+cInfo = ab.get()
+cFolder = cb.get()
+cSummary = db.get()
+cSNumber = bb.get()
+cINumber = gb.get()
+cDCNumber = hb.get()
 
 gui.mainloop()
