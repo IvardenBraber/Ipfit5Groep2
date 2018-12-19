@@ -31,4 +31,21 @@ class account:
 
 
 
+def check_login(input_name, input_password):
+    dictionary_1 = {'Geerd' : 'wachtwoord1', 'Piet' : 'wachtwoord2' }
+    try:
+
+        for slot in dictionary_1:
+            if input_password == dictionary_1[input_name]:
+                print('U wordt nu doorgestuurd')
+                break
+            else:
+                print('Foutief wachtwoord')
+                break
+    except:
+        print('Onbekende gebruiker')
+
+    '''Moet nog een koppeling met de database gemaakt worden zodra deze af is.'''
+
+
 
