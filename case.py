@@ -1,12 +1,5 @@
 import datetime
 class case:
-    case_name = ''
-    case_folder = ''
-    case_summary = ''
-    serial_number_case = ''
-    imaged_number = ''
-    serial_number_carrier = ''
-
     def __init__(self, case_name, case_folder, case_summary, serial_number_case, imaged_number, serial_number_carrier):
         self.case_name = case_name
         self.folder = case_folder
