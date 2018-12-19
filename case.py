@@ -1,10 +1,10 @@
 import datetime
 class case:
-    def __init__(self, case_Name, case_Folder, case_Summary, serial_Number_Case, imaged_Number, serial_Number_Carrier):
-        self.case_Name = case_Name
-        self.folder = case_Folder
-        self.summary = case_Summary
+    def __init__(self, case_name, case_folder, case_summary, serial_number_case, imaged_number, serial_number_carrier):
+        self.case_name = case_name
+        self.folder = case_folder
+        self.summary = case_summary
         self.date = datetime.datetime.now()
-        self.serial_Number_Case = serial_Number_Case
-        self.imaged_Number = imaged_Number
-        self.serial_Number_Carrier = serial_Number_Carrier
+        self.serial_number_case = serial_number_case
+        self.imaged_number = imaged_number
+        self.serial_number_carrier = serial_number_carrier
