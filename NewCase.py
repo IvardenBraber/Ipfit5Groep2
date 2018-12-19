@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import ttk
+from case import case
 #import case
-#case_1 = case('Henk',10,1,1)
+case_1 = case('Henk',10,1,1, 123, 123)
 
 gui = Tk()
 gui.geometry("600x550")
@@ -46,17 +47,18 @@ h.place(x=50, y=380)
 hb = Entry(gui)
 hb.place(x=185, y=380)
 
-e = ttk.Button(gui, text="Create Case", width=11)
-e.place(x=195, y=430)
-
-f = ttk.Button(gui, text="Go Back", width=7)
-f.place(x=120, y=430)
-
 cInfo = ab.get()
 cFolder = cb.get()
 cSummary = db.get()
 cSNumber = bb.get()
 cINumber = gb.get()
 cDCNumber = hb.get()
+
+e = ttk.Button(gui, text="Create Case", width=11, command=(case(cInfo, cFolder, cSummary, cSNumber, cINumber, cDCNumber)))
+e.place(x=195, y=430)
+
+f = ttk.Button(gui, text="Go Back", width=7)
+f.place(x=120, y=430)
+
 
 gui.mainloop()
