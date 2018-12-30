@@ -1,8 +1,11 @@
 from tkinter import *
 import tkinter as tk
 
+import menuV1
+import LogoutV1
 
 class HOAX(tk.Tk):
+
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -13,7 +16,7 @@ class HOAX(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frame = {}
-        for F in (Main, CreateAccount, Login, homepage):
+        for F in (Main, CreateAccount, Login):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frame[page_name] = frame
@@ -53,7 +56,7 @@ class Login(tk.Frame):
         b = Label(self, text="Password: ")
         b.place(x=132, y=220)
 
-        c = Button(self, text="LOGIN", width=5, command=lambda: controller.show_frame("homepage")) #homepage command toegevoegd
+        c = Button(self, text="LOGIN", width=5, command=lambda: menuV1.homepage()) #homepage command toegevoegd
         c.place(x=200, y=350)
 
         f = Button(self, text="Go Back", width=7, command=lambda: controller.show_frame("Main"))
@@ -98,67 +101,12 @@ class CreateAccount(tk.Frame):
         db = Entry(self, show="**")
         db.place(x=185, y=280)
 
-        e = Button(self, text="Register account", width=16)
+        e = Button(self, text="Register account", width=16, command=lambda: controller.show_frame("Login"))
         e.place(x=195, y=350)
 
         f = Button(self, text="Go Back", width=7, command=lambda: controller.show_frame("Main"))
         f.place(x=120,y=350)
 
-class homepage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-
-        menubar = Menu(self)
-        case = Menu(menubar, tearoff=0)
-        case.add_command(label="New Case...")  # add commands!
-        case.add_command(label="Open Existing Case...")
-        case.add_command(label="Close Case...")
-
-        evidence = Menu(menubar, tearoff=0)
-        evidence.add_command(label="Add Image...")
-        evidence.add_command(label="Verify Image...")
-
-        options = Menu(menubar, tearoff=0)
-        options.add_command(label="Logout...")
-
-        help = Menu(menubar, tearoff=0)
-        help.add_command(label="About...")
-
-        menubar.add_cascade(label="Case", menu=case)
-        menubar.add_cascade(label="Evidence", menu=evidence)
-        menubar.add_cascade(label="Options", menu=options)
-        menubar.add_cascade(label="Help", menu=help)
-
-        self.config(menu=menubar)
-
-# class homepage():
-#     window = Tk()
-#     window.geometry("500x500")
-#
-#     menubar = Menu(window)
-#     case = Menu(menubar, tearoff=0)
-#     case.add_command(label="New Case...")  # add commands!
-#     case.add_command(label="Open Existing Case...")
-#     case.add_command(label="Close Case...")
-#
-#     evidence = Menu(menubar, tearoff=0)
-#     evidence.add_command(label="Add Image...")
-#     evidence.add_command(label="Verify Image...")
-#
-#     options = Menu(menubar, tearoff=0)
-#     options.add_command(label="Logout...")
-#
-#     help = Menu(menubar, tearoff=0)
-#     help.add_command(label="About...")
-#
-#     menubar.add_cascade(label="Case", menu=case)
-#     menubar.add_cascade(label="Evidence", menu=evidence)
-#     menubar.add_cascade(label="Options", menu=options)
-#     menubar.add_cascade(label="Help", menu=help)
-
-    #window.config(menu=menubar)
-    #window.mainloop()
 
 
 
@@ -169,5 +117,6 @@ class homepage(tk.Frame):
 
 if __name__ == '__main__':
     test = HOAX()
+    test.title("HOAX")
     test.geometry("500x500")
     test.mainloop()

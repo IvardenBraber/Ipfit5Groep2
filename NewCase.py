@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from case import case
 
-#case_1 = case('Henk',10,1,1, 123, 123)
-
 gui = Tk()
 gui.geometry("600x550")
 
