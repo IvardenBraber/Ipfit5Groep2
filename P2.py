@@ -6,7 +6,6 @@ import LogoutV1
 
 class HOAX(tk.Tk):
 
-
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -34,6 +33,8 @@ class Main(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+
+        self.geometry = "550x500"
 
         a = Button(self, text="LOGIN", command=lambda: controller.show_frame("Login"))
         a.place(x=220, y=200)

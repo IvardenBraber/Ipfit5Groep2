@@ -4,6 +4,9 @@ from case import case
 
 import NewCaseV1
 import AboutV1
+import LogoutV1
+import CloseCaseV1
+import AddImageV1
 
 class homepage(Tk):
 
@@ -17,14 +20,14 @@ class homepage(Tk):
         self.case.add_command(label="New Case...", command=lambda: NewCaseV1.newCase()) # command=lambda: newCase.createNewCase(self))  # add commands!
 
         self.case.add_command(label="Open Existing Case...")
-        self.case.add_command(label="Close Case...")
+        self.case.add_command(label="Close Case...", command=lambda: CloseCaseV1.closeCase())
 
         self.evidence = Menu(menubar, tearoff=0)
-        self.evidence.add_command(label="Add Image...")
+        self.evidence.add_command(label="Add Image...", command= lambda: AddImageV1.addImage())
         self.evidence.add_command(label="Verify Image...")
 
         self.options = Menu(menubar, tearoff=0)
-        self.options.add_command(label="Logout...")
+        self.options.add_command(label="Logout...", command= lambda: LogoutV1.logout())
 
         self.help = Menu(menubar, tearoff=0)
         self.help.add_command(label="About...", command= lambda: AboutV1.about())

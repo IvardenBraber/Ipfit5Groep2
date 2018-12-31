@@ -6,6 +6,7 @@ import menuV1
 
 class newCase(Tk):
 
+
     def createNewCase(self):
         gui = self
         gui.geometry("600x550")
@@ -67,6 +68,7 @@ class newCase(Tk):
     def __init__(self):
         Tk.__init__(self)
         self.createNewCase()
+        self.classCreated()
         #self.config(menu=self.menuBar)
 
 if __name__ == "__main__":
