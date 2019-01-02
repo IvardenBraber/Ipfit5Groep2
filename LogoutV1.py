@@ -10,20 +10,21 @@ class logout(Tk):
 
     def logoutWindow(self):
         gui = self
-        gui.geometry("600x550")
+        gui.geometry("400x250")
+        gui.title("HOAX")
 
 
-        logout_label = Label(gui, text="Logout", width=6, font=("bold", 15))
-        logout_label.place(x=170, y=53)
+        logout_label = Label(gui, text="Log out", width=6, font=("bold", 15))
+        logout_label.place(x=160, y=53)
 
-        a = Label(gui, text="Are you sure you want to logout as the current user?", width=64)
-        a.place(x=80, y=130)
+        a = Label(gui, text="Are you sure you want to log out as the current user?", width=64)
+        a.place(x=-10, y=110)
 
-        e = ttk.Button(gui, text="YES", width=10, command= lambda: P2.HOAX(self.geometry("500x500"))) #geometry niet werkend
-        e.place(x=195, y=430)
+        e = ttk.Button(gui, text="YES", width=10, command= lambda: [P2.HOAX(), self.destroy()]) #geometry niet werkend #lambda: [P2.HOAX(), self.destroy()])
+        e.place(x=205, y=175)
 
-        f = ttk.Button(gui, text="NO", width=10, command= self.destroy)
-        f.place(x=120, y=430)
+        f = ttk.Button(gui, text="NO", width=10, command= lambda: [self.destroy(), menuV1.homepage()])#self.destroy)
+        f.place(x=120, y=175)
 
     def __init__(self):
         Tk.__init__(self)

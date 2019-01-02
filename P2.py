@@ -9,6 +9,9 @@ class HOAX(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
+        self.title("HOAX")
+        self.geometry("500x500")
+
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
@@ -28,13 +31,13 @@ class HOAX(tk.Tk):
         frame = self.frame[page_name]
         frame.tkraise()
 
+
 class Main(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        self.geometry = "550x500"
 
         a = Button(self, text="LOGIN", command=lambda: controller.show_frame("Login"))
         a.place(x=220, y=200)
@@ -48,6 +51,7 @@ class Login(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
+
         login_label = Label(self, text="Login Page", width=14, font=("bold", 15))
         login_label.place(x=170, y=73)
 
@@ -57,7 +61,7 @@ class Login(tk.Frame):
         b = Label(self, text="Password: ")
         b.place(x=132, y=220)
 
-        c = Button(self, text="LOGIN", width=5, command=lambda: menuV1.homepage()) #homepage command toegevoegd
+        c = Button(self, text="LOGIN", width=5, command=lambda: [menuV1.homepage(), self.destroy()]) #self.destroy verwijdert de frame Login#homepage command toegevoegd
         c.place(x=200, y=350)
 
         f = Button(self, text="Go Back", width=7, command=lambda: controller.show_frame("Main"))
@@ -74,6 +78,7 @@ class CreateAccount(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+
 
         createAccount_label = Label(self, text="Create Account", width=14, font=("bold", 15))
         createAccount_label.place(x=170, y=53)
@@ -111,10 +116,14 @@ class CreateAccount(tk.Frame):
 
 
 
-#positionRight = int(tk.winfo_screenwidth() / 2 - tk.winfo_reqwidth() / 2)
-# positionDown = int(tk.winfo_screenheight() / 3 - tk.winfo_reqheight() / 2)
 
-#tk.geometry("+{}+{}".format(positionRight, positionDown))
+
+# positionRight = tk.winfo_screenwidth() / 2 - tk.winfo_reqwidth() / 2
+# positionDown = tk.winfo_screenheight() / 3 - tk.winfo_reqheight() / 2
+#
+# tk.geometry("+{}+{}".format(positionRight, positionDown))
+
+
 
 if __name__ == '__main__':
     test = HOAX()

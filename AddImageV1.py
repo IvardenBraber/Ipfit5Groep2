@@ -10,6 +10,7 @@ class addImage(Tk):
     def addImageWindow(self):
         gui = self
         gui.geometry("600x550")
+        gui.title("HOAX")
 
         newCase_label = Label(gui, text="Add an Image", width=12, font=("bold", 15))
         newCase_label.place(x=170, y=53)

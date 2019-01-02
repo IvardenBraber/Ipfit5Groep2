@@ -3,53 +3,54 @@ from tkinter import ttk
 from case import case
 
 import menuV1
+import CaseCreatedV1
 
 class newCase(Tk):
-
 
     def createNewCase(self):
         gui = self
         gui.geometry("600x550")
+        gui.title("HOAX")
 
         newCase_label = Label(gui, text="New Case", width=14, font=("bold", 15))
-        newCase_label.place(x=170, y=53)
+        newCase_label.place(x=215, y=53)
 
         a = Label(gui, text="Case Name:", width=10)
-        a.place(x=70, y=130)
+        a.place(x=110, y=130)
 
         ab = Entry(gui)
-        ab.place(x=185, y=130)
+        ab.place(x=230, y=130)
 
         c = Label(gui, text="Case Folder:", width=12)
-        c.place(x=60, y=180)
+        c.place(x=100, y=180)
 
         cb = Entry(gui)
-        cb.place(x=185, y=180)
+        cb.place(x=230, y=180)
 
         d = Label(gui, text="Case Summary:", width=13)
-        d.place(x=65, y=230)
+        d.place(x=105, y=230)
 
         db = Entry(gui)
-        db.place(x=185, y=230)
+        db.place(x=230, y=230)
 
         ##serienummer, nummer van image, nummer mediadrager toevoegen
         b = Label(gui, text="Serialnumber: ", width=13)
-        b.place(x=62, y=280)
+        b.place(x=102, y=280)
 
         bb = Entry(gui)
-        bb.place(x=185, y=280)
+        bb.place(x=230, y=280)
 
         g = Label(gui, text="Image number: ", width=14)
-        g.place(x=62, y=330)
+        g.place(x=102, y=330)
 
         gb = Entry(gui)
-        gb.place(x=185, y=330)
+        gb.place(x=230, y=330)
 
         h = Label(gui, text="Data carrier number: ", width=21)
-        h.place(x=50, y=380)
+        h.place(x=90, y=380)
 
         hb = Entry(gui)
-        hb.place(x=185, y=380)
+        hb.place(x=230, y=380)
 
         cInfo = ab.get()
         cFolder = cb.get()
@@ -59,17 +60,16 @@ class newCase(Tk):
         cDCNumber = hb.get()
 
         e = ttk.Button(gui, text="Create Case", width=11,
-                       command= lambda: (case(cInfo, cFolder, cSummary, cSNumber, cINumber, cDCNumber))) #lambda toegevoegd, is dit nodig?
-        e.place(x=195, y=430)
+                       command= lambda: [self.destroy(), CaseCreatedV1.newClassCreated()])#(case(cInfo, cFolder, cSummary, cSNumber, cINumber, cDCNumber))) #lambda toegevoegd, is dit nodig?
+        e.place(x=285, y=430)
 
         f = ttk.Button(gui, text="Go Back", width=7, command= self.destroy)
-        f.place(x=120, y=430)
+        f.place(x=205, y=430)
 
     def __init__(self):
         Tk.__init__(self)
         self.createNewCase()
-        self.classCreated()
-        #self.config(menu=self.menuBar)
+
 
 if __name__ == "__main__":
     run = newCase()
