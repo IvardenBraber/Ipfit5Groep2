@@ -31,6 +31,9 @@ class HOAX(tk.Tk):
         frame = self.frame[page_name]
         frame.tkraise()
 
+    def close_frame(self):
+        self.destroy()
+
 
 class Main(tk.Frame):
 
@@ -60,8 +63,10 @@ class Login(tk.Frame):
         b = Label(self, text="Password: ")
         b.place(x=132, y=220)
 
-        c = Button(self, text="LOGIN", width=5, command=lambda: [menuV1.Homepage(), self.destroy()])
+        c = Button(self, text="LOGIN", width=5, command=lambda: [menuV1.Homepage(), controller.close_frame()]) #controller.close_frame() toegevoegd
+        #[menuV1.Homepage(), self.destroy()])
         #self.destroy verwijdert de frame Login#homepage command toegevoegd
+
         c.place(x=200, y=350)
 
         f = Button(self, text="Go Back", width=7, command=lambda: controller.show_frame("Main"))
