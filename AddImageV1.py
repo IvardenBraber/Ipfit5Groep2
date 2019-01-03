@@ -4,31 +4,30 @@ from case import case
 
 import menuV1
 
-class addImage(Tk):
 
+class AddImage(Tk):
 
-    def addImageWindow(self):
+    def addimagewindow(self):
         gui = self
         gui.geometry("600x550")
         gui.title("HOAX")
 
-        newCase_label = Label(gui, text="Add an Image", width=12, font=("bold", 15))
-        newCase_label.place(x=170, y=53)
-
+        new_case_label = Label(gui, text="Add an Image", width=12, font=("bold", 15))
+        new_case_label.place(x=170, y=53)
 
         e = ttk.Button(gui, text="Add Image", width=11,
-                       command= lambda: menuV1.homepage())
+                       command=lambda: menuV1.Homepage())
         e.place(x=195, y=430)
 
-        f = ttk.Button(gui, text="Go Back", width=7, command= self.destroy)
+        f = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
         f.place(x=120, y=430)
 
     def __init__(self):
         Tk.__init__(self)
-        self.addImageWindow()
+        self.addimagewindow()
+
 
 if __name__ == "__main__":
     run = addImage()
     run.title("HOAX")
     run.mainloop()
-

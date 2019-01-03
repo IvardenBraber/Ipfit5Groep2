@@ -5,15 +5,16 @@ from case import case
 import menuV1
 import CaseCreatedV1
 
-class newCase(Tk):
 
-    def createNewCase(self):
+class NewCase(Tk):
+
+    def createnewcase(self):
         gui = self
         gui.geometry("600x550")
         gui.title("HOAX")
 
-        newCase_label = Label(gui, text="New Case", width=14, font=("bold", 15))
-        newCase_label.place(x=215, y=53)
+        new_case_label = Label(gui, text="New Case", width=14, font=("bold", 15))
+        new_case_label.place(x=215, y=53)
 
         a = Label(gui, text="Case Name:", width=10)
         a.place(x=110, y=130)
@@ -60,19 +61,19 @@ class newCase(Tk):
         cDCNumber = hb.get()
 
         e = ttk.Button(gui, text="Create Case", width=11,
-                       command= lambda: [self.destroy(), CaseCreatedV1.newClassCreated()])#(case(cInfo, cFolder, cSummary, cSNumber, cINumber, cDCNumber))) #lambda toegevoegd, is dit nodig?
+                       command=lambda: [self.destroy(), CaseCreatedV1.NewClassCreated()])
+        #(case(cInfo, cFolder, cSummary, cSNumber, cINumber, cDCNumber))) #lambda toegevoegd, is dit nodig?
         e.place(x=285, y=430)
 
-        f = ttk.Button(gui, text="Go Back", width=7, command= self.destroy)
+        f = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
         f.place(x=205, y=430)
 
     def __init__(self):
         Tk.__init__(self)
-        self.createNewCase()
+        self.createnewcase()
 
 
 if __name__ == "__main__":
     run = newCase()
     run.title("HOAX")
     run.mainloop()
-
