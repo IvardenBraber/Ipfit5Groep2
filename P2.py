@@ -3,7 +3,6 @@ import tkinter as tk
 import menuV1
 import LogoutV1
 
-
 class HOAX(tk.Tk):
 
     def __init__(self, *args, **kwargs):

@@ -1,8 +1,4 @@
 from tkinter import *
-#from tkinter import ttk
-#from case import case
-
-#import menuV1
 
 
 class About(Tk):
@@ -15,11 +11,11 @@ class About(Tk):
         new_case_label = Label(gui, text="About this tool", width=15, font=("bold", 15))
         new_case_label.place(x=118, y=43)
 
-        a = Label(gui, text="This tool has been created for analysis purposes.\n "
+        a = Label(gui, text="This tool has been created for analyze purposes.\n "
                             "If you have any questions, you may contact the following email: ", width=116)
         a.place(x=-200, y=100)
 
-        a = Label(gui, text="Created by: \n Ivar den Braber, Calvin van Dijk, Michael Heenes and Alison de Bruijn ",
+        a = Label(gui, text="Created by: \n Ivar den Braber, Calvin Dijk, Michael Heenes and Alison de Bruijn ",
                   width=80)
         a.place(x=-85, y=170)
 

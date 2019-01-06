@@ -1,25 +1,16 @@
 from tkinter import *
 from tkinter import ttk
-from tkinter import filedialog #toegevoegd
+from tkinter import filedialog
 from case import case
 
 import menuV1
 import CaseCreatedV1
 
-import BrowsefunctionTest
 
-filename = ""
-filepath = ""
-
-def browse():
-
-    filename = filedialog.askopenfilename()
-
-    filepath = filename
-
-
-
-
+def browsefunction(self):
+    filedirectory = filedialog.askdirectory()
+    self.directorypath.set(filedirectory)
+    #print(self.entIn.get())
 
 class NewCase(Tk):
 
@@ -41,10 +32,11 @@ class NewCase(Tk):
         c = Label(gui, text="Case Folder:", width=12)
         c.place(x=100, y=180)
 
-        cc = Button(gui, text="Browse", command=lambda: browse())
-        cc.place(x=300, y=180)
+        cc = Button(gui, text="Browse..", command=lambda: browsefunction(self))
+        cc.place(x=375, y=176)
 
-        cb = Entry(gui)
+        self.directorypath = StringVar()
+        cb = Entry(gui, textvariable=self.directorypath)
         cb.place(x=230, y=180)
 
         d = Label(gui, text="Case Summary:", width=13)
