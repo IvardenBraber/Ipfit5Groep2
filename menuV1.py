@@ -2,13 +2,14 @@ from tkinter import *
 from tkinter import ttk
 from case import case
 
-import NewCaseV2
+#import NewCaseV2
 import AboutV1
 import LogoutV1
 import CloseCaseV1
-import AddImageV1
+#import AddImageV1
 import OpenCaseV1
-
+import AddImageV2
+import NewCaseV3
 
 class Homepage(Tk):
 
@@ -20,7 +21,7 @@ class Homepage(Tk):
         menubar = Menu(self)
         self.menuBar = Menu(master=self)
         self.case = Menu(self.menuBar, tearoff=0)
-        self.case.add_command(label="New Case...", command=lambda: NewCaseV2.NewCase())
+        self.case.add_command(label="New Case...", command=lambda: NewCaseV3.NewCase())
         # command=lambda: newCase.createNewCase(self))  # add commands!
 
         self.case.add_command(label="Open Existing Case...", command=lambda: OpenCaseV1.OpenCase())
