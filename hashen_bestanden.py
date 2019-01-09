@@ -39,12 +39,12 @@ argparser.add_argument(
 args = argparser.parse_args()
 filenames = pyewf.glob(args.imagefile)
 ewf_handle = pyewf.handle()
-ewf_handle.open()
+ewf_handle.open(filenames)
 imagehandle = ewf_Img_Info(ewf_handle)
 
 partitionTable = pytsk3.Volume_Info(imagehandle)
 for partition in partitionTable:
-    print
-    partition.addr, partition.desc, "%ss(%s)" % (partition.start, partition.start * 512), partition.len
+    print(
+    partition.addr, partition.desc, "%ss(%s)" % (partition.start, partition.start * 512), partition.len)
     if 'NTFS' in partition.desc:
         filesystemObject = pytsk3.FS_Info(imagehandle, offset=(partition.start * 512))
