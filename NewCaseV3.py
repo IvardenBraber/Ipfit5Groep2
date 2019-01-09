@@ -45,35 +45,12 @@ class NewCase(Tk):
         db = Entry(gui)
         db.place(x=230, y=230)
 
-        # ##serienummer, nummer van image, nummer mediadrager toevoegen
-        # b = Label(gui, text="Serialnumber: ", width=13)
-        # b.place(x=102, y=280)
-        #
-        # bb = Entry(gui)
-        # bb.place(x=230, y=280)
-        #
-        # g = Label(gui, text="Image number: ", width=14)
-        # g.place(x=102, y=330)
-        #
-        # gb = Entry(gui)
-        # gb.place(x=230, y=330)
-        #
-        # h = Label(gui, text="Data carrier number: ", width=21)
-        # h.place(x=90, y=380)
-        #
-        # hb = Entry(gui)
-        # hb.place(x=230, y=380)
-
         cInfo = ab.get()
         cFolder = cb.get()
         cSummary = db.get()
-        #cSNumber = bb.get()
-        #cINumber = gb.get()
-        #cDCNumber = hb.get()
 
         e = ttk.Button(gui, text="Create Case", width=11,
-                       command=lambda: [self.destroy(), CaseCreatedV1.NewClassCreated()])
-        #(case(cInfo, cFolder, cSummary, cSNumber, cINumber, cDCNumber))) #lambda toegevoegd, is dit nodig?
+                       command=lambda: [self.destroy(), CaseCreatedV1.NewClassCreated(), (case(cInfo, cFolder, cSummary))]) #lambda toegevoegd, is dit nodig?
         e.place(x=285, y=300)
 
         f = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)

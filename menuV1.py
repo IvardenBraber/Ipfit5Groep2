@@ -28,7 +28,7 @@ class Homepage(Tk):
         self.case.add_command(label="Close Case...", command=lambda: [self.destroy, CloseCaseV1.CloseCase()])
 
         self.evidence = Menu(menubar, tearoff=0)
-        self.evidence.add_command(label="Add Image...", command=lambda: AddImageV1.AddImage())
+        self.evidence.add_command(label="Add Image...", command=lambda: AddImageV2.AddImage())
         self.evidence.add_command(label="Verify Image...")
 
         self.options = Menu(menubar, tearoff=0)

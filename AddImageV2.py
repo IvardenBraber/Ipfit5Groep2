@@ -26,6 +26,8 @@ class AddImage(Tk):
         gb = Entry(gui)
         gb.place(x=236, y=120)
 
+        imagenumber = gb.get()
+
         a = Label(gui, text="Image Location:", width=15)
         a.place(x=108, y=170)
 
@@ -35,6 +37,8 @@ class AddImage(Tk):
         self.directorypath = StringVar()
         ab = Entry(gui, textvariable=self.directorypath)
         ab.place(x=236, y=170)
+
+        imagepath = ab.get()
 
         b = Label(gui, text="Serial number: ", width=15)
         b.place(x=104, y=220)
