@@ -8,14 +8,14 @@ class CreateAccountError(Tk):
         gui.geometry("400x200")
         gui.title("HOAX")
 
-        new_case_label = Label(gui, text="Error", width=15, font=("bold", 15))
-        new_case_label.place(x=118, y=43)
+        error_label = Label(gui, text="Error", width=15, font=("bold", 15))
+        error_label.place(x=118, y=43)
 
         a = Label(gui, text="You entered a name that already exists.", width=38)
         a.place(x=65, y=100)
 
-        cc = Button(gui, text="OK", command=lambda: self.destroy())
-        cc.place(x=190, y=146)
+        b = Button(gui, text="OK", command=lambda: self.destroy())
+        b.place(x=190, y=146)
 
 
     def __init__(self):

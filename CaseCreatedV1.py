@@ -13,8 +13,8 @@ class NewClassCreated(Tk):
         gui.geometry("500x250")
         gui.title("HOAX")
 
-        new_case_label = Label(gui, text="New Case", width=14, font=("bold", 15))
-        new_case_label.place(x=170, y=53)
+        new_class_label = Label(gui, text="New Case", width=14, font=("bold", 15))
+        new_class_label.place(x=170, y=53)
 
         a = Label(gui, text="The new case has been created. \n You can now either close this window or click next to add an image.", width=102)
         a.place(x=-105, y=110)

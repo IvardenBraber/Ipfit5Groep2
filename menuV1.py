@@ -2,16 +2,16 @@ from tkinter import *
 from tkinter import ttk
 from case import case
 
-#import NewCaseV2
+#import different classes
 import AboutV1
 import LogoutV1
 import CloseCaseV1
-#import AddImageV1
 import OpenCaseV1
 import AddImageV2
 import NewCaseV3
 import VerifyImageV1
 import ExportFilesWindowV1
+
 
 class Homepage(Tk):
 
@@ -20,6 +20,7 @@ class Homepage(Tk):
         self.geometry('700x555')
         self.title('HOAX')
 
+        #add menubar to the window and configure it
         menubar = Menu(self)
         self.menuBar = Menu(master=self)
         self.case = Menu(self.menuBar, tearoff=0)
@@ -39,46 +40,47 @@ class Homepage(Tk):
         self.help = Menu(menubar, tearoff=0)
         self.help.add_command(label="About...", command=lambda: AboutV1.About())
 
+        #make sure all's added to the menuBar to work
         self.menuBar.add_cascade(label="Case", menu=self.case)
         self.menuBar.add_cascade(label="Evidence", menu=self.evidence)
         self.menuBar.add_cascade(label="Options", menu=self.options)
         self.menuBar.add_cascade(label="Help", menu=self.help)
 
-        ##aanpassingen
-        gridWindow = PanedWindow(self, orient=HORIZONTAL)
-        gridWindow.pack(fill=BOTH, expand=True)
-        """
-        Every column and row has a "weight" grid option associated with it, 
-        which tells it how much it should grow if there is extra room in the 
-        _F_Cassa to fill. By default, the weight of each column or row is 0, 
-        meaning don't expand to fill space.
-        """
-        gridWindow.grid_rowconfigure(0, weight=1)
-        gridWindow.grid_columnconfigure(0, weight=1)
+        #aanpassingen
 
-        # I set background colors just to highlight the results
-        rightPane = Frame(gridWindow, bg="dark grey")
-        leftPane = Frame(gridWindow)
+        #grid pane configuraration
+        grid_window = PanedWindow(self, orient=HORIZONTAL)
+        grid_window.pack(fill=BOTH, expand=True)
 
-        gridWindow.add(leftPane)
-        gridWindow.add(rightPane)
+        grid_window.grid_rowconfigure(0, weight=1)
+        grid_window.grid_columnconfigure(0, weight=1)
 
-        rightPane.grid(row=0, column=1)
-        leftPane.grid(row=0, column=0)
+        right_pane = Frame(grid_window, bg="grey97")
+        left_pane = Frame(grid_window)
 
-        leftLabel = Label(leftPane, text="Exported files")
-        leftLabel.grid(row=0, column=10)
+        grid_window.add(left_pane)
+        grid_window.add(right_pane)
 
-        rightButton = Button(rightPane, text="Export files with hash warnings", command=lambda: ExportFilesWindowV1.Export())
-        rightButton.grid(row=0, column=100)
+        #positions of the panes
+        right_pane.grid(row=0, column=1)
+        left_pane.grid(row=0, column=0)
 
-        rightLabel = Label(rightPane, text="Hash Warnings", bg="dark grey")
-        rightLabel.grid(row=0, column=0)
+        #adding the export label
+        left_label = Label(left_pane, text="Exported files")
+        left_label.grid(row=0, column=10)
 
-        # Resize frame widgets:
-        gridWindow.paneconfig(leftPane, width=120, height=400, sticky=E + W + S + N)
-        gridWindow.paneconfig(rightPane, width=200, height=400, sticky=E + W + S + N)
+        #adding the export button
+        right_button = Button(right_pane, text="Export files with hash warnings",
+                              command=lambda: ExportFilesWindowV1.Export())
+        right_button.grid(row=0, column=100)
 
+        #adding the warning label
+        right_label = Label(right_pane, text="Hash Warnings", bg="grey97")
+        right_label.grid(row=0, column=0)
+
+        #resizing the frame widgets
+        grid_window.paneconfig(left_pane, width=120, height=400, sticky=E + W + S + N)
+        grid_window.paneconfig(right_pane, width=200, height=400, sticky=E + W + S + N)
 
     def __init__(self):
         Tk.__init__(self)
