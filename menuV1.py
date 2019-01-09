@@ -10,6 +10,8 @@ import CloseCaseV1
 import OpenCaseV1
 import AddImageV2
 import NewCaseV3
+import VerifyImageV1
+import ExportFilesWindowV1
 
 class Homepage(Tk):
 
@@ -29,7 +31,7 @@ class Homepage(Tk):
 
         self.evidence = Menu(menubar, tearoff=0)
         self.evidence.add_command(label="Add Image...", command=lambda: AddImageV2.AddImage())
-        self.evidence.add_command(label="Verify Image...")
+        self.evidence.add_command(label="Verify Image...", command=lambda: VerifyImageV1.Verify())
 
         self.options = Menu(menubar, tearoff=0)
         self.options.add_command(label="Logout...", command=lambda: [LogoutV1.Logout(), self.destroy()])
@@ -42,6 +44,42 @@ class Homepage(Tk):
         self.menuBar.add_cascade(label="Options", menu=self.options)
         self.menuBar.add_cascade(label="Help", menu=self.help)
 
+        ##aanpassingen
+        gridWindow = PanedWindow(self, orient=HORIZONTAL)
+        gridWindow.pack(fill=BOTH, expand=True)
+        """
+        Every column and row has a "weight" grid option associated with it, 
+        which tells it how much it should grow if there is extra room in the 
+        _F_Cassa to fill. By default, the weight of each column or row is 0, 
+        meaning don't expand to fill space.
+        """
+        gridWindow.grid_rowconfigure(0, weight=1)
+        gridWindow.grid_columnconfigure(0, weight=1)
+
+        # I set background colors just to highlight the results
+        rightPane = Frame(gridWindow, bg="dark grey")
+        leftPane = Frame(gridWindow)
+
+        gridWindow.add(leftPane)
+        gridWindow.add(rightPane)
+
+        rightPane.grid(row=0, column=1)
+        leftPane.grid(row=0, column=0)
+
+        leftLabel = Label(leftPane, text="Exported files")
+        leftLabel.grid(row=0, column=10)
+
+        rightButton = Button(rightPane, text="Export files with hash warnings", command=lambda: ExportFilesWindowV1.Export())
+        rightButton.grid(row=0, column=100)
+
+        rightLabel = Label(rightPane, text="Hash Warnings", bg="dark grey")
+        rightLabel.grid(row=0, column=0)
+
+        # Resize frame widgets:
+        gridWindow.paneconfig(leftPane, width=120, height=400, sticky=E + W + S + N)
+        gridWindow.paneconfig(rightPane, width=200, height=400, sticky=E + W + S + N)
+
+
     def __init__(self):
         Tk.__init__(self)
         self.widgetsdesign()
@@ -49,7 +87,7 @@ class Homepage(Tk):
 
 
 #main hoeft hier niet aangeroepen te worden om te runnen?
-# if __name__ == "__main__":
-#     run = homepage()
-#     run.title("HOAX")
-#     run.mainloop()
+if __name__ == "__main__":
+    run = Homepage()
+    run.title("HOAX")
+    run.mainloop()

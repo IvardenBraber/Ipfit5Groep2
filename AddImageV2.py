@@ -6,8 +6,8 @@ from case import case
 import menuV1
 
 def browsefunction(self):
-    filedirectory = filedialog.askdirectory()
-    self.directorypath.set(filedirectory)
+    file = filedialog.askopenfilename()
+    self.directorypath.set(file)
 
 
 class AddImage(Tk):
