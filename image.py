@@ -35,11 +35,11 @@ partitionTable = pytsk3.Volume_Info(imagehandle)
 for partition in partitionTable:
     print(partition.addr, partition.desc, "%ss(%s)" % (partition.start, partition.start * 512), partition.len)
 
-filesystemObject = pytsk3.FS_Info(imagehandle, offset= partition.start)
+filesystemObject = pytsk3.FS_Info(imagehandle, offset= 4194304)
 fileobject = filesystemObject.open("/$FAT1")
 print("File Inode:",fileobject.info.meta.addr)
 print("File Name:",fileobject.info.name.name)
 print("File Creation Time:",datetime.datetime.fromtimestamp(fileobject.info.meta.crtime).strftime('%Y-%m-%d %H:%M:%S'))
 outfile = open('DFIRWizard-output', 'w')
 filedata = fileobject.read_random(0,fileobject.info.meta.size)
-outfile.write(filedata)
+
