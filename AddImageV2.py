@@ -40,6 +40,9 @@ class AddImage(Tk):
 
         imagepath = ab.get()
 
+        def getimagepath():
+            return imagepath
+
         b = Label(gui, text="Serial number: ", width=15)
         b.place(x=104, y=220)
 
