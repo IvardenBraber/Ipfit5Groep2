@@ -14,10 +14,6 @@ class Verify(Tk):
         a = Label(gui, text="Choose the image you want to verify: ", width=116)
         a.place(x=-200, y=100)
 
-        
-
-
-
     def __init__(self):
         Tk.__init__(self)
         self.verifyimage()

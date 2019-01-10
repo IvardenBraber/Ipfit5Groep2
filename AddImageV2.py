@@ -26,7 +26,7 @@ class AddImage(Tk):
         gb = Entry(gui)
         gb.place(x=236, y=120)
 
-        imagenumber = gb.get()
+        # imagenumber = gb.get()
 
         a = Label(gui, text="Image Location:", width=15)
         a.place(x=108, y=170)

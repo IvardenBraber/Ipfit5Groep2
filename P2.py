@@ -3,6 +3,14 @@ import tkinter as tk
 import menuV1
 import LogoutV1
 
+# import LoginCheckV1 #toegevoegd
+# onderaan toegevoegd
+global username
+global usernameEntry
+# nieuwe import
+import tkinter.messagebox as tm
+
+
 class HOAX(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -59,22 +67,37 @@ class Login(tk.Frame):
         a = Label(self, text="Username: ")
         a.place(x=130, y=200)
 
-        b = Label(self, text="Password: ")
-        b.place(x=132, y=220)
+        a = Label(self, text="Password: ")
+        a.place(x=132, y=220)
 
-        c = Button(self, text="LOGIN", width=5, command=lambda: [menuV1.Homepage(), controller.close_frame()]) #controller.close_frame() toegevoegd
-        #[menuV1.Homepage(), self.destroy()])
-        #self.destroy verwijdert de frame Login#homepage command toegevoegd
+        c = Button(self, text="LOGIN", width=5, command=lambda: logincheck(self))
+        # LoginCheckV1.login_check())#LoginCheckV1)#[menuV1.Homepage(), controller.close_frame()])
+        # # controller.close_frame() toegevoegd
+        # [menuV1.Homepage(), self.destroy()])
+        # self.destroy verwijdert de frame Login#homepage command toegevoegd
 
         c.place(x=200, y=350)
 
         f = Button(self, text="Go Back", width=7, command=lambda: controller.show_frame("Main"))
         f.place(x=120, y=350)
 
-        e = Entry(self)
-        e.place(x=220, y=200)
-        f = Entry(self, show="**")
-        f.place(x=220, y=220)
+        usernameEntry = Entry(self)
+        usernameEntry.place(x=220, y=200)
+        passwordEntry = Entry(self, show="**")
+        passwordEntry.place(x=220, y=220)
+
+        def logincheck(self):
+            username = usernameEntry.get()
+            password = passwordEntry.get()
+
+            if len(username) != 0:
+                if len(password) != 0:
+                    menuV1.Homepage()
+                    controller.close_frame()
+                else:
+                    tm.showerror("Error", "Wrong password")
+            else:
+                tm.showerror("Error", "Wrong username")
 
 
 class CreateAccount(tk.Frame):
@@ -86,35 +109,54 @@ class CreateAccount(tk.Frame):
         create_account_label = Label(self, text="Create Account", width=14, font=("bold", 15))
         create_account_label.place(x=170, y=53)
 
+        create_account_label = Label(self, text="You need to fill in all the boxes in order to create an account.", width=64)
+        create_account_label.place(x=30, y=85)
+
         a = Label(self, text="Full Name: ", width=11)
         a.place(x=80, y=130)
 
-        ab = Entry(self)
-        ab.place(x=185, y=130)
+        c_fullname = Entry(self)
+        c_fullname.place(x=185, y=130)
 
         b = Label(self, text="Email: ", width=7)
         b.place(x=90, y=180)
 
-        bb = Entry(self)
-        bb.place(x=185, y=180)
+        c_email = Entry(self)
+        c_email.place(x=185, y=180)
 
         c = Label(self, text="Username: ", width=10)
         c.place(x=80, y=230)
 
-        cb = Entry(self)
-        cb.place(x=185, y=230)
+        c_username = Entry(self)
+        c_username.place(x=185, y=230)
 
         d = Label(self, text="Password: ", width=10)
         d.place(x=80, y=280)
 
-        db = Entry(self, show="**")
-        db.place(x=185, y=280)
+        c_password = Entry(self, show="**")
+        c_password.place(x=185, y=280)
 
-        e = Button(self, text="Register account", width=16, command=lambda: controller.show_frame("Login"))
+        e = Button(self, text="Register account", width=16, command=lambda: register_account(self))#controller.show_frame("Login"))
         e.place(x=195, y=350)
 
         f = Button(self, text="Go Back", width=7, command=lambda: controller.show_frame("Main"))
         f.place(x=120, y=350)
+
+        def register_account(self):
+            name = c_fullname.get()
+            email = c_email.get()
+            username_create = c_username.get()
+            password_create = c_password.get()
+
+            if len(name) != 0:
+                if len(email) != 0:
+                    if len(username_create) != 0:
+                        if len(password_create) != 0:
+                            controller.show_frame("Login")
+                            # self.destroy() -> extra window wordt aangemaakt
+            else:
+                tm.showerror("Error", "Incorrect values")
+
 
 
 # positionRight = tk.winfo_screenwidth() / 2 - tk.winfo_reqwidth() / 2
