@@ -26,6 +26,8 @@ class ewf_Img_Info(pytsk3.Img_Info):
 ewf_handle = pyewf.handle()
 
 filenames = pyewf.glob("image_sd_pi.E01")
+filenames.open.dir(root)
+
 ewf_handle.open(filenames)
 
 imagehandle = ewf_Img_Info(ewf_handle)
