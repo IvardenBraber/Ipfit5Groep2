@@ -4,8 +4,6 @@ import pytsk3
 import datetime
 import pyewf
 
-
-
 class ewf_Img_Info(pytsk3.Img_Info):
     def __init__(self, ewf_handle):
         self._ewf_handle = ewf_handle
@@ -26,7 +24,6 @@ class ewf_Img_Info(pytsk3.Img_Info):
 ewf_handle = pyewf.handle()
 
 filenames = pyewf.glob("image_sd_pi.E01")
-filenames.open.dir(root)
 
 ewf_handle.open(filenames)
 
@@ -37,11 +34,10 @@ partitionTable = pytsk3.Volume_Info(imagehandle)
 for partition in partitionTable:
     print(partition.addr, partition.desc, "%ss(%s)" % (partition.start, partition.start * 512), partition.len)
 
-filesystemObject = pytsk3.FS_Info(imagehandle, offset= 4194304)
+filesystemObject = pytsk3.FS_Info(imagehandle, offset=4194304)
 fileobject = filesystemObject.open("/$FAT1")
 print("File Inode:",fileobject.info.meta.addr)
 print("File Name:",fileobject.info.name.name)
 print("File Creation Time:",datetime.datetime.fromtimestamp(fileobject.info.meta.crtime).strftime('%Y-%m-%d %H:%M:%S'))
 outfile = open('DFIRWizard-output', 'w')
 filedata = fileobject.read_random(0,fileobject.info.meta.size)
-
