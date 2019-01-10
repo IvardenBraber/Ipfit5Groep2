@@ -50,7 +50,7 @@ class NewCase(Tk):
         cSummary = db.get()
 
         e = ttk.Button(gui, text="Create Case", width=11,
-                       command=lambda: [self.destroy(), CaseCreatedV1.NewClassCreated(), (case(cInfo, cFolder, cSummary))]) #lambda toegevoegd, is dit nodig?
+                       command=lambda: [self.destroy(), CaseCreatedV1.NewClassCreated()]) #, (case(cInfo, cFolder, cSummary))]) #lambda toegevoegd, is dit nodig?
         e.place(x=285, y=300)
 
         f = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
