@@ -95,9 +95,9 @@ class Login(tk.Frame):
                     menuV1.Homepage()
                     controller.close_frame()
                 else:
-                    tm.showerror("Error", "Wrong password")
+                    tm.showerror("Error", "Wrong username or password")
             else:
-                tm.showerror("Error", "Wrong username")
+                tm.showerror("Error", "Wrong username or password")
 
 
 class CreateAccount(tk.Frame):
