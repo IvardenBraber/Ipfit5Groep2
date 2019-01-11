@@ -4,3 +4,6 @@ DFIRWizard-output
 *.E01
 USB_Stick_maaike.E02
 USB_Stick_maaike.E03
+test.py
+image.dd
+__pycache__/extension_check.cpython-37.pyc
