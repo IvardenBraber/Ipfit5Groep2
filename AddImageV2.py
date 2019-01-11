@@ -10,6 +10,8 @@ def browsefunction(self):
     self.directorypath.set(file)
 
 
+
+
 class AddImage(Tk):
 
     def addimagewindow(self):
@@ -38,9 +40,8 @@ class AddImage(Tk):
         ab = Entry(gui, textvariable=self.directorypath)
         ab.place(x=236, y=170)
 
-        imagepath = ab.get()
-
         def getimagepath():
+            imagepath = ab.get()
             return imagepath
 
         b = Label(gui, text="Serial number: ", width=15)
@@ -56,7 +57,7 @@ class AddImage(Tk):
         hb.place(x=236, y=270)
 
         b = ttk.Button(gui, text="Add Image", width=11,
-                       command=lambda:  self.destroy())
+                       command=lambda:  [print(getimagepath()), self.destroy()])
         b.place(x=295, y=345)
 
         c = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
