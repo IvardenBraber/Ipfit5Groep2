@@ -6,6 +6,8 @@ import pyewf
 import sys
 from tabulate import tabulate
 import hashlib
+#import image
+
 
 
 if __name__ == '__main__':
@@ -14,6 +16,7 @@ if __name__ == '__main__':
     epilog="Developed by {} on {}".format(
     ", ".join('Hoax'), '10-01-2019')
     )
+
 
 class EWFImgInfo(pytsk3.Img_Info):
     def __init__(self, ewf_handle):
@@ -82,13 +85,15 @@ def extension_check(path: str):
     return(type)
 
 
-
-
-def main():
+def open_image(path):
     #path = 'D:\Files\Jaar 2\IPFIT5\Code\Ipfit5Groep2\image.dd'
-    path = 'D:\Files\Jaar 2\IPFIT5\Code\Ipfit5Groep2\image_sd_pi.E01'
+    #path = 'D:\Files\Jaar 2\IPFIT5\Code\Ipfit5Groep2\image_sd_pi.E01'
     #4194304
-    image_type = extension_check(path)
-    image_read(path,image_type,4194304)
 
-main()
+    image_type = extension_check(path)
+    print(image_type)
+    #offsets = image.offset_recog()
+    image_read(path,image_type,0)
+
+
+

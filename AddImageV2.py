@@ -4,6 +4,7 @@ from tkinter import filedialog
 from case import case
 
 import menuV1
+import image_read
 
 def browsefunction(self):
     file = filedialog.askopenfilename()
@@ -57,7 +58,7 @@ class AddImage(Tk):
         hb.place(x=236, y=270)
 
         b = ttk.Button(gui, text="Add Image", width=11,
-                       command=lambda:  [print(getimagepath()), self.destroy()])
+                       command=lambda: [image_read.open_image(getimagepath()), self.destroy()])
         b.place(x=295, y=345)
 
         c = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)

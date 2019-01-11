@@ -20,24 +20,41 @@ class ewf_Img_Info(pytsk3.Img_Info):
     def get_size(self):
         return self._ewf_handle.get_media_size()
 
+def offset_recog():
+    partition_offset_list = []
 
-ewf_handle = pyewf.handle()
 
-filenames = pyewf.glob("image_sd_pi.E01")
+    ewf_handle = pyewf.handle()
 
-ewf_handle.open(filenames)
+    filenames = pyewf.glob("image_sd_pi.E01")
 
-imagehandle = ewf_Img_Info(ewf_handle)
+    ewf_handle.open(filenames)
 
-partitionTable = pytsk3.Volume_Info(imagehandle)
+    imagehandle = ewf_Img_Info(ewf_handle)
 
-for partition in partitionTable:
-    print(partition.addr, partition.desc, "%ss(%s)" % (partition.start, partition.start * 512), partition.len)
+    partitionTable = pytsk3.Volume_Info(imagehandle)
 
-filesystemObject = pytsk3.FS_Info(imagehandle, offset=4194304)
-fileobject = filesystemObject.open("/$FAT1")
-print("File Inode:",fileobject.info.meta.addr)
-print("File Name:",fileobject.info.name.name)
-print("File Creation Time:",datetime.datetime.fromtimestamp(fileobject.info.meta.crtime).strftime('%Y-%m-%d %H:%M:%S'))
-outfile = open('DFIRWizard-output', 'w')
-filedata = fileobject.read_random(0,fileobject.info.meta.size)
+    for partition in partitionTable:
+        print(partition.addr, partition.desc, "%ss(%s)" % (partition.start, partition.start * 512), partition.len)
+        partition_offset_list.append(partition.start * 512)
+
+
+    for x in partition_offset_list:
+        print(x)
+
+    filesystemObject = pytsk3.FS_Info(imagehandle, offset=4194304)
+    fileobject = filesystemObject.open("/$FAT1")
+    print("File Inode:",fileobject.info.meta.addr)
+    print("File Name:",fileobject.info.name.name)
+    print("File Creation Time:",datetime.datetime.fromtimestamp(fileobject.info.meta.crtime).strftime('%Y-%m-%d %H:%M:%S'))
+    #outfile = open('DFIRWizard-output', 'w')
+    #filedata = fileobject.read_random(0,fileobject.info.meta.size)
+    return partition_offset_list
+
+
+def main():
+    offset_recog()
+
+
+if __name__ == '__main__':
+    main()
