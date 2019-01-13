@@ -7,3 +7,5 @@ USB_Stick_maaike.E03
 test.py
 image.dd
 __pycache__/extension_check.cpython-37.pyc
+__pycache__/image.cpython-37.pyc
+__pycache__/image_read.cpython-37.pyc
