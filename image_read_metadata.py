@@ -5,6 +5,7 @@ import pytsk3
 import pyewf
 import sys
 from tabulate import tabulate
+
 import hashlib
 #import image
 
@@ -33,7 +34,7 @@ class EWFImgInfo(pytsk3.Img_Info):
     def get_size(self):
         return self._ewf_handle.get_media_size()
 
-def image_read(image, img_type, offset):
+def image_read(image, img_type, part_type):
     print("[+] Opening {}".format(image))
     if img_type == "ewf":
         try:
@@ -44,31 +45,26 @@ def image_read(image, img_type, offset):
             sys.exit(2)
         ewf_handle = pyewf.handle()
         ewf_handle.open(filenames)
+        e01_metadata(ewf_handle)
         # Open PYTSK3 handle on EWF Image
         img_info = EWFImgInfo(ewf_handle)
     else:
         img_info = pytsk3.Img_Info(image)
 
     try:
-        fs = pytsk3.FS_Info(img_info, offset)
+        if part_type is not None:
+            attr_id = getattr(pytsk3, "TSK_VS_TYPE_" + part_type)
+            volume = pytsk3.Volume_Info(img_info, attr_id)
+        else:
+            volume = pytsk3.Volume_Info(img_info)
     except IOError:
         _, e, _ = sys.exc_info()
-        print("[-] Unable to open FS:\n {}".format(e))
-        exit()
+        print("[-] Unable to read partition table:\n {}".format(e))
+        sys.exit(3)
+    part_metadata(volume)
 
-    root_dir = fs.open_dir(path="/")
-    table = [["Name", "Type", "Size", "Create Date", "Modify Date", "Hash Value"]]
-    for f in root_dir:
-        name = f.info.name.name
-        if f.info.meta.type == pytsk3.TSK_FS_META_TYPE_DIR:
-            f_type = "DIR"
-        else:
-            f_type = "FILE"
-        size = f.info.meta.size
-        create = f.info.meta.crtime
-        modify = f.info.meta.mtime
-        table.append([name, f_type, size, create, modify])
-    print(tabulate(table, headers="firstrow"))
+
+
 
 
 
@@ -84,6 +80,27 @@ def extension_check(path: str):
         return text
     return(type)
 
+def e01_metadata(e01_image):
+    print("\nEWF Acquisition Metadata")
+    print("-" * 20)
+    headers = e01_image.get_header_values()
+    hashes = e01_image.get_hash_values()
+    for k in headers:
+        print("{}: {}".format(k, headers[k]))
+    for h in hashes:
+        print("Acquisition {}: {}".format(h, hashes[h]))
+    print("Bytes per Sector: {}".format(e01_image.bytes_per_sector))
+    print("Number of Sectors: {}".format(
+        e01_image.get_number_of_sectors()))
+    print("Total Size: {}".format(e01_image.get_media_size()))
+
+def part_metadata(vol):
+    table = [["Index", "Type", "Offset Start (Sectors)", "Length (Sectors)"]]
+    for part in vol:
+        table.append([part.addr, part.desc.decode("utf-8"), part.start,part.len])
+    print("\n Partition Metadata")
+    print("-" * 20)
+    print(tabulate(table, headers="firstrow"))
 
 
 def open_image(path):
@@ -91,9 +108,10 @@ def open_image(path):
     #path = 'D:\Files\Jaar 2\IPFIT5\Code\Ipfit5Groep2\image_sd_pi.E01'
     #4194304
     image_type = extension_check(path)
+    print(image_type)
     #offsets = image.offset_recog()
     #image_read(path,image_type,0)
-    image_read(path, image_type, 0)
+    image_read(path, image_type, None)
 
 
-open_image('USB_Sjors.E01')
+open_image('image_sd_pi.E01')
