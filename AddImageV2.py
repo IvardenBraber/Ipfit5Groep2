@@ -67,7 +67,7 @@ class AddImage(Tk):
         self.addimagewindow()
 
 
-if __name__ == "__main__":
-    run = AddImage()
-    run.title("HOAX")
-    run.mainloop()
+#if __name__ == "__main__":
+#    run = AddImage()
+#    run.title("HOAX")
+#    run.mainloop()

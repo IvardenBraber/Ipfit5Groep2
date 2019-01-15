@@ -6,14 +6,12 @@ from tkinter import filedialog
 import menuV1
 import CaseCreatedV1
 
-
 def browsefunction(self):
     filedirectory = filedialog.askdirectory()
     self.directorypath.set(filedirectory)
     #print(self.entIn.get())
 
 class NewCase(Tk):
-
 
     def createnewcase(self):
         gui = self
@@ -61,7 +59,7 @@ class NewCase(Tk):
         self.createnewcase()
 
 
-if __name__ == "__main__":
-    run = NewCase()
-    run.title("HOAX")
-    run.mainloop()
+#if __name__ == "__main__":
+#    run = NewCase()
+#    run.title("HOAX")
+#    run.mainloop()
