@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 
-from case import case
+#from case import case
 
 import menuV1
 import P2

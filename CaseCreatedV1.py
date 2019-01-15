@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from case import case
+#from case import case
 
 import menuV1
 import AddImageV2
@@ -20,7 +20,7 @@ class NewClassCreated(Tk):
         a.place(x=-105, y=110)
 
         b = ttk.Button(gui, text="Add Image", width=11,
-                       command=lambda: [AddImageV2.AddImage(), self.destroy()])
+                       command=lambda: [self.destroy(), AddImageV2.AddImage()])
         b.place(x=235, y=175)
 
         c = ttk.Button(gui, text="Close", width=7, command=self.destroy)
@@ -30,7 +30,7 @@ class NewClassCreated(Tk):
         Tk.__init__(self)
         self.newclasscreated()
 
-if __name__ == "__main__":
-    run = NewClassCreated()
-    run.title("HOAX")
-    run.mainloop()
+#if __name__ == "__main__":
+#    run = NewClassCreated()
+#    run.title("HOAX")
+#    run.mainloop()

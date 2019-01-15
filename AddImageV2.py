@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
-from case import case
+#from case import case
 
 import menuV1
 import image_read
@@ -69,7 +69,7 @@ class AddImage(Tk):
         self.addimagewindow()
 
 
-if __name__ == "__main__":
-    run = AddImage()
-    run.title("HOAX")
-    run.mainloop()
+#if __name__ == "__main__":
+#    run = AddImage()
+#    run.title("HOAX")
+#    run.mainloop()
