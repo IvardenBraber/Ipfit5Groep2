@@ -87,20 +87,20 @@ class Homepage(Tk):
         grid_window.paneconfig(right_pane, width=200, height=400, sticky=E + W + S + N)
         #
         # # creating an configuring tree view
-        # treeview = ttk.Treeview(right_pane)
-        # treeview.place(x=70, y=100)
-        # treeview["columns"] = "one"
-        # treeview.column("one", width=200)
-        # # treeview.column("two", width=100)
-        # treeview.heading("one", text="File Path")
+        treeview = ttk.Treeview(right_pane)
+        treeview.place(x=70, y=300)
+        treeview["columns"] = "one"
+        treeview.column("one", width=200)
+        #treeview.column("two", width=100)
+        treeview.heading("one", text="File Path")
         #
-        # self.path = os.getcwd()
+        self.path = os.getcwd()
         #
-        # in_treeviewdata = treeview.insert("", 1, "Example 1", text="Example 1")
-        # treeview.insert(in_treeviewdata, "end", "dir 2", text="sub dir 2", values="Home")
+        in_treeviewdata = treeview.insert("", 1, "Example 1", text="Example 1")
+        treeview.insert(in_treeviewdata, "end", "dir 2", text="sub dir 2", values="Home")
 
         def klik(event):
-            print("click")
+
             newwindow = Tk()
             newwindow.title("Window")
             newwindow.geometry("400x350")
@@ -124,7 +124,7 @@ class Homepage(Tk):
 
         listbox = Listbox(right_pane)
         listbox.insert(END, filename)
-        listbox.place(x=100, y=200)
+        listbox.place(x=100, y=100)
 
         listbox.bind("<Double-1>", klik)
 
