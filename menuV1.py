@@ -14,6 +14,7 @@ import AddImageV2
 import NewCaseV3
 import VerifyImageV1
 import ExportFilesWindowV1
+import bookmarkV1
 
 
 class Homepage(Tk):
@@ -73,7 +74,7 @@ class Homepage(Tk):
         left_label.grid(row=0, column=10)
         #
         # # adding the export button
-        right_button = Button(right_pane, text="Export files with hash warnings",
+        right_button = Button(right_pane, text="Export ALL files with hash warnings",
                                command=lambda: ExportFilesWindowV1.Export())
         right_button.grid(row=0, column=100)
         #
@@ -98,9 +99,26 @@ class Homepage(Tk):
         # in_treeviewdata = treeview.insert("", 1, "Example 1", text="Example 1")
         # treeview.insert(in_treeviewdata, "end", "dir 2", text="sub dir 2", values="Home")
 
-
         def klik(event):
             print("click")
+            newwindow = Tk()
+            newwindow.title("Window")
+            newwindow.geometry("400x350")
+
+            option_title = Label(newwindow, text="Export or Bookmark?", width=19, font=("bold", 15))
+            option_title.place(x=100, y=50)
+
+            export_label = Label(newwindow, text="Do you want to export this file?", width=32)
+            export_label.place(x=80, y=120)
+
+            export_button = Button(newwindow, text="YES", width=3, command=lambda: ExportFilesWindowV1.Export())
+            export_button.place(x=180, y=155)
+
+            bookmark_label = Label(newwindow, text="Do you want to bookmark this file?", width=34)
+            bookmark_label.place(x=75, y=220)
+
+            bookmark_button = Button(newwindow, text="YES", width=3, command=lambda: bookmarkV1.Bookmark())
+            bookmark_button.place(x=180, y=255)
 
         filename = os.path.basename("E:\\2e jaar Informatica\\Periode 2\\IPFIT5\\code")
 

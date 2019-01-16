@@ -5,6 +5,7 @@ def browsefunction(self):
     filedirectory = filedialog.askdirectory()
     self.directorypath.set(filedirectory)
 
+
 class Export(Tk):
 
     def exportfiles(self):
@@ -25,9 +26,11 @@ class Export(Tk):
         bb = Entry(gui, textvariable=self.directorypath)
         bb.place(x=236, y=100)
 
-        c = Button(gui, text="Start the exporting proces", width=26)#, command=lambda: browsefunction(self))
-        c.place(x=152, y=140)
+        go_back = Button(gui, text="Go Back", width=7, command=lambda: self.destroy())
+        go_back.place(x=110, y=140)
 
+        c = Button(gui, text="Start the exporting proces", width=26)  #, command=lambda: browsefunction(self))
+        c.place(x=172, y=140)
 
     def __init__(self):
         Tk.__init__(self)
