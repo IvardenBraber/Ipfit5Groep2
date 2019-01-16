@@ -15,6 +15,7 @@ import NewCaseV3
 import VerifyImageV1
 import ExportFilesWindowV1
 import bookmarkV1
+import SeeBookmarksV1
 
 
 class Homepage(Tk):
@@ -39,7 +40,9 @@ class Homepage(Tk):
         self.evidence.add_command(label="Verify Image...", command=lambda: VerifyImageV1.Verify())
 
         self.options = Menu(menubar, tearoff=0)
-        self.options.add_command(label="Log out...", command=lambda: [LogoutV1.Logout(), self.destroy()])
+        self.options.add_command(label="Bookmarks...", command=lambda: SeeBookmarksV1.Bookmark())
+        self.options.add_command(label="Export all Warnings...", command=lambda: ExportFilesWindowV1.Export())
+        self.options.add_command(label="Log out...", command=lambda: [self.destroy(), LogoutV1.Logout()])
 
         self.help = Menu(menubar, tearoff=0)
         self.help.add_command(label="About...", command=lambda: AboutV1.About())
@@ -74,9 +77,9 @@ class Homepage(Tk):
         left_label.grid(row=0, column=10)
         #
         # # adding the export button
-        right_button = Button(right_pane, text="Export ALL files with hash warnings",
-                               command=lambda: ExportFilesWindowV1.Export())
-        right_button.grid(row=0, column=100)
+        #right_button = Button(right_pane, text="Export ALL files with hash warnings"
+        #                      , command=lambda: ExportFilesWindowV1.Export())
+        #right_button.grid(row=0, column=100)
         #
         # # adding the warning label
         right_label = Label(right_pane, text="Hash Warnings", bg="grey97")
@@ -87,16 +90,19 @@ class Homepage(Tk):
         grid_window.paneconfig(right_pane, width=200, height=400, sticky=E + W + S + N)
         #
         # # creating an configuring tree view
+
+        path = os.path.basename("C:")
+
         treeview = ttk.Treeview(right_pane)
         treeview.place(x=70, y=300)
         treeview["columns"] = "one"
         treeview.column("one", width=200)
         #treeview.column("two", width=100)
-        treeview.heading("one", text="File Path")
+        treeview.heading("one", text="path")
         #
         self.path = os.getcwd()
         #
-        in_treeviewdata = treeview.insert("", 1, "Example 1", text="Example 1")
+        in_treeviewdata = treeview.insert(path, 1, "dir1", text="Example 1")
         treeview.insert(in_treeviewdata, "end", "dir 2", text="sub dir 2", values="Home")
 
         def klik(event):

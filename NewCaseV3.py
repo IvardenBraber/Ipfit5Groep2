@@ -59,7 +59,7 @@ class NewCase(Tk):
         self.createnewcase()
 
 
-#if __name__ == "__main__":
-#    run = NewCase()
-#    run.title("HOAX")
-#    run.mainloop()
+if __name__ == "__main__":
+    run = NewCase()
+    run.title("HOAX")
+    run.mainloop()
