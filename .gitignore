@@ -9,6 +9,7 @@ image.dd
 __pycache__/extension_check.cpython-37.pyc
 __pycache__/image.cpython-37.pyc
 __pycache__/image_read.cpython-37.pyc
+<<<<<<< HEAD
 *.pyc
 *.pyc
 *.pyc
@@ -32,3 +33,7 @@ __pycache__/NewCaseV3.cpython-37.pyc
 __pycache__/OpenCaseV1.cpython-37.pyc
 __pycache__/P2.cpython-37.pyc
 __pycache__/VerifyImageV1.cpython-37.pyc
+=======
+__pycache__/bookmarkV1.cpython-37.pyc
+__pycache__/SeeBookmarksV1.cpython-37.pyc
+>>>>>>> Startmenu
