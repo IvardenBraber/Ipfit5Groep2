@@ -9,3 +9,5 @@ image.dd
 __pycache__/extension_check.cpython-37.pyc
 __pycache__/image.cpython-37.pyc
 __pycache__/image_read.cpython-37.pyc
+__pycache__/bookmarkV1.cpython-37.pyc
+__pycache__/SeeBookmarksV1.cpython-37.pyc
