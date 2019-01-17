@@ -4,9 +4,9 @@ import menuV1
 import LogoutV1
 
 # import LoginCheckV1 #toegevoegd
-# onderaan toegevoegd
-global username
-global usernameEntry
+# onderaan toegevoegd, global variables uitgecomment
+#global username
+#global usernameEntry
 # nieuwe import
 import tkinter.messagebox as tm
 
