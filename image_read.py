@@ -74,7 +74,8 @@ def image_read(image, img_type, offset):
 
 def extension_check(path: str):
     path = path.split('.')
-    extension = str(path[1])
+    extension = str(path[len(path)-1])
+    print(extension)
     text = 'Wrong datatype'
     if(extension == 'dd'):
         type = 'raw'
@@ -85,15 +86,13 @@ def extension_check(path: str):
     return(type)
 
 
-
 def open_image(path):
     #path = 'D:\Files\Jaar 2\IPFIT5\Code\Ipfit5Groep2\image.dd'
     #path = 'D:\Files\Jaar 2\IPFIT5\Code\Ipfit5Groep2\image_sd_pi.E01'
     #4194304
+
+
     image_type = extension_check(path)
+    print(image_type)
     #offsets = image.offset_recog()
-    #image_read(path,image_type,0)
     image_read(path, image_type, 0)
-
-
-open_image('USB_Sjors.E01')
