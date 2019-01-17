@@ -126,10 +126,15 @@ class Homepage(Tk):
             bookmark_button = Button(newwindow, text="YES", width=3, command=lambda: bookmarkV1.Bookmark())
             bookmark_button.place(x=180, y=255)
 
-        filename = os.path.basename("E:\\2e jaar Informatica\\Periode 2\\IPFIT5\\code")
+        #filename = os.path.basename("C:\\Users\\aliso\\Downloads\\PBS100%.png")
+
+        list = ['test', 'test1', 'test2']
 
         listbox = Listbox(right_pane)
-        listbox.insert(END, filename)
+
+        for item in list:
+            listbox.insert(END, item)
+
         listbox.place(x=100, y=100)
 
         listbox.bind("<Double-1>", klik)
