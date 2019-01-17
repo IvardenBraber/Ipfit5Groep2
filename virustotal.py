@@ -76,7 +76,7 @@ def program_start():
 
 def main():
     key = "ea44595e28b22f726e1fe8891943439afe787a180da42cf736f4200274b67931"
-    hash = "e1112134b6dcc8bed54e0e34d8ac272795e73d74"
+    hash = "7f79cdba46407d0bae493d283367eeda"
     output = "virus.txt"
 
     # Run for a single hash + key
