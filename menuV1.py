@@ -128,14 +128,17 @@ class Homepage(Tk):
 
         #filename = os.path.basename("C:\\Users\\aliso\\Downloads\\PBS100%.png")
 
+        #frame = Frame(right_pane)
+        #frame.grid(row=0, column=0)
+
         list = ['test', 'test1', 'test2']
 
-        listbox = Listbox(right_pane)
+        listbox = Listbox(right_pane, width=75)
 
         for item in list:
             listbox.insert(END, item)
 
-        listbox.place(x=100, y=100)
+        listbox.place(x=25, y=100)
 
         listbox.bind("<Double-1>", klik)
 
