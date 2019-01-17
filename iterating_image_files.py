@@ -161,6 +161,7 @@ def write_csv(data, output):
         csv_writer.writerow(headers)
         for result_list in data:
             csv_writer.writerows(result_list)
+    convert_csv_to_list(output)
 
 
 def extension_check(path: str):
@@ -179,6 +180,12 @@ def open_iterater_image(path,output_name):
     output_name += '.csv'
     iterate_image(path,extension_check(path),output_name, None)
 
+def convert_csv_to_list(filename):
+    image_list = [tuple(row) for row in csv.reader(open(filename, 'rU'))]
+    for x in image_list:
+        print(x)
+
+    return image_list
 
 
 open_iterater_image('USB_Sjors.E01','hoedje')
