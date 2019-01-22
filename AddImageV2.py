@@ -4,17 +4,14 @@ from tkinter import filedialog
 #from case import case
 
 import menuV1
-import image_read
+import iterating_image_files
 
 def browsefunction(self):
     file = filedialog.askopenfilename()
     self.directorypath.set(file)
 
 
-
-
 class AddImage(Tk):
-
     def addimagewindow(self):
         gui = self
         gui.geometry("600x425")
@@ -56,13 +53,18 @@ class AddImage(Tk):
 
         hb = Entry(gui)
         hb.place(x=236, y=270)
-
+        image_opener = iterating_image_files.image_stored_list([])
         b = ttk.Button(gui, text="Add Image", width=11,
-                       command=lambda: [image_read.open_image(getimagepath()), self.destroy()])
+                       command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), print(image_opener.get_list()), self.destroy()])
+
+
         b.place(x=295, y=345)
 
         c = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
         c.place(x=220, y=345)
+
+
+
 
     def __init__(self):
         Tk.__init__(self)

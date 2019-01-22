@@ -16,6 +16,7 @@ import VerifyImageV1
 import ExportFilesWindowV1
 import bookmarkV1
 import SeeBookmarksV1
+import AddImageV2
 
 
 class Homepage(Tk):
