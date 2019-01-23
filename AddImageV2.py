@@ -26,6 +26,10 @@ class AddImage(Tk):
         gb = Entry(gui)
         gb.place(x=236, y=120)
 
+        def getimagename():
+            imagename = gb.get()
+            return imagename
+
         # imagenumber = gb.get()
 
         a = Label(gui, text="Image Location:", width=15)
@@ -48,12 +52,22 @@ class AddImage(Tk):
         bb = Entry(gui)
         bb.place(x=236, y=220)
 
+        def getserialnumber():
+            serialname = bb.get()
+            return serialname
+
         h = Label(gui, text="Data carrier number: ", width=21)
         h.place(x=98, y=270)
 
         hb = Entry(gui)
         hb.place(x=236, y=270)
+
+        def getdatacarriernumber():
+            datacarriernumber = hb.get()
+            return datacarriernumber
+
         image_opener = iterating_image_files.image_stored_list([])
+
         b = ttk.Button(gui, text="Add Image", width=11,
                        command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), print(image_opener.get_list()), self.destroy()])
 

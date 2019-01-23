@@ -27,6 +27,10 @@ class NewCase(Tk):
         ab = Entry(gui)
         ab.place(x=230, y=130)
 
+        def gtcasename():
+            casename = ab.get()
+            return casename
+
         c = Label(gui, text="Case Folder:", width=12)
         c.place(x=100, y=180)
 
@@ -37,15 +41,23 @@ class NewCase(Tk):
         cb = Entry(gui, textvariable=self.directorypath)
         cb.place(x=230, y=180)
 
+        def getimagelocation():
+            imagelocation = cb.get()
+            return imagelocation
+
         d = Label(gui, text="Case Summary:", width=13)
         d.place(x=105, y=230)
 
         db = Entry(gui)
         db.place(x=230, y=230)
 
-        cInfo = ab.get()
-        cFolder = cb.get()
-        cSummary = db.get()
+        def getcasesummary():
+            casesummary = db.get()
+            return casesummary
+
+        #cInfo = ab.get()
+        #cFolder = cb.get()
+        #cSummary = db.get()
 
         e = ttk.Button(gui, text="Create Case", width=11,
                        command=lambda: [self.destroy(), CaseCreatedV1.NewClassCreated()]) #, (case(cInfo, cFolder, cSummary))]) #lambda toegevoegd, is dit nodig?
