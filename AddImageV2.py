@@ -10,6 +10,9 @@ def browsefunction(self):
     file = filedialog.askopenfilename()
     self.directorypath.set(file)
 
+image_list = [' TEST  ']
+image_loaded = False
+
 
 class AddImage(Tk):
     def addimagewindow(self):
@@ -69,15 +72,26 @@ class AddImage(Tk):
         image_opener = iterating_image_files.image_stored_list([])
 
         b = ttk.Button(gui, text="Add Image", width=11,
-                       command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), print(image_opener.get_list()), self.destroy()])
-
+                       command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), defineImageList(self),
+                                        image_loaded_true(), self.destroy()])
 
         b.place(x=295, y=345)
 
         c = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
         c.place(x=220, y=345)
 
+        def image_loaded_true():
+            global image_loaded
+            image_loaded = True
+            return image_loaded
 
+        def defineImageList(self):
+            global image_list
+            image_list = image_opener.get_list()
+            return image_list
+
+        def get_image_list(self):
+            return image_list
 
 
     def __init__(self):

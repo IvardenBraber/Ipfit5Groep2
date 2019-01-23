@@ -4,6 +4,7 @@ from tkinter import ttk
 
 # os import
 import os
+import time
 
 # import different classes
 import AboutV1
@@ -108,6 +109,8 @@ class Homepage(Tk):
 
         def klik(event):
 
+            print(AddImageV2.image_list,'\n', AddImageV2.image_loaded)
+
             newwindow = Tk()
             newwindow.title("Window")
             newwindow.geometry("400x350")
@@ -126,22 +129,36 @@ class Homepage(Tk):
 
             bookmark_button = Button(newwindow, text="YES", width=3, command=lambda: bookmarkV1.Bookmark())
             bookmark_button.place(x=180, y=255)
+            self.after(10, Homepage(), self.destroy())
 
         #filename = os.path.basename("C:\\Users\\aliso\\Downloads\\PBS100%.png")
 
         #frame = Frame(right_pane)
         #frame.grid(row=0, column=0)
 
-        list = ['test', 'test1', 'test2', 'test2', 'test2', 'test25', 'test25', 'test23', 'test5', 'test2', 'test2', 'test2']
-
         listbox = Listbox(right_pane, width=75)
 
-        for item in list:
-            listbox.insert(END, item)
+        if AddImageV2.image_loaded == False:
+            list = ['Test niks ofzo']
+
+            for item in list:
+                listbox.insert(END, item)
+
+        if AddImageV2.image_loaded is True:
+
+            list = AddImageV2.image_list #AddImageV2.image_list
+
+            for item in list:
+                listbox.insert(END, item)
+
+
+        #for item in list:
+        #    listbox.insert(END, item)
 
         listbox.place(x=25, y=100)
-
         listbox.bind("<Double-1>", klik)
+
+
 
     def __init__(self):
         Tk.__init__(self)
@@ -150,7 +167,7 @@ class Homepage(Tk):
 
 
 # main hoeft hier niet aangeroepen te worden om te runnen?
-if __name__ == "__main__":
-    run = Homepage()
-    run.title("HOAX")
-    run.mainloop()
+#if __name__ == "__main__":
+#    run = Homepage()
+#    run.title("HOAX")
+#    run.mainloop()
