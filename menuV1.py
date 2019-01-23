@@ -129,7 +129,7 @@ class Homepage(Tk):
 
             bookmark_button = Button(newwindow, text="YES", width=3, command=lambda: bookmarkV1.Bookmark())
             bookmark_button.place(x=180, y=255)
-            self.after(10, Homepage(), self.destroy())
+
 
         #filename = os.path.basename("C:\\Users\\aliso\\Downloads\\PBS100%.png")
 
