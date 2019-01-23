@@ -27,7 +27,7 @@ class NewCase(Tk):
         ab = Entry(gui)
         ab.place(x=230, y=130)
 
-        def gtcasename():
+        def getcasename():
             casename = ab.get()
             return casename
 

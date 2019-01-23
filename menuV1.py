@@ -132,7 +132,7 @@ class Homepage(Tk):
         #frame = Frame(right_pane)
         #frame.grid(row=0, column=0)
 
-        list = ['test', 'test1', 'test2']
+        list = ['test', 'test1', 'test2', 'test2', 'test2', 'test25', 'test25', 'test23', 'test5', 'test2', 'test2', 'test2']
 
         listbox = Listbox(right_pane, width=75)
 
