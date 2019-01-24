@@ -73,8 +73,8 @@ class AddImage(Tk):
 
         b = ttk.Button(gui, text="Add Image", width=11,
                        command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), defineImageList(self),
-                                        image_loaded_true(), menuV1.Homepage.destroy(),
-                                        self.after(10, menuV1.Homepage(), self.destroy()),
+                                        image_loaded_true(),
+                                        self.after(10, self.destroy(), menuV1.Homepage()),
                                         self.destroy()])
 
         b.place(x=295, y=345)
