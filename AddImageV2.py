@@ -13,7 +13,6 @@ def browsefunction(self):
 image_list = [' TEST  ']
 image_loaded = False
 
-
 class AddImage(Tk):
     def addimagewindow(self):
         gui = self
@@ -71,9 +70,10 @@ class AddImage(Tk):
 
         image_opener = iterating_image_files.image_stored_list([])
 
+
         b = ttk.Button(gui, text="Add Image", width=11,
                        command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), defineImageList(self),
-                                        image_loaded_true(),
+                                        image_loaded_true(), menuV1.Homepage.destroy(),
                                         self.after(10, menuV1.Homepage(), self.destroy()),
                                         self.destroy()])
 
