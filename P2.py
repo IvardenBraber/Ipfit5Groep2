@@ -3,6 +3,8 @@ import tkinter as tk
 import menuV1
 import LogoutV1
 
+import sqlite3
+import main_nieuw
 # import LoginCheckV1 #toegevoegd
 # onderaan toegevoegd
 global username
@@ -92,8 +94,17 @@ class Login(tk.Frame):
 
             if len(username) != 0:
                 if len(password) != 0:
-                    menuV1.Homepage()
-                    controller.close_frame()
+                    con = sqlite3.connect("database.db")
+                    cur = con.cursor()
+                    cur.execute("SELECT U_name, U_password FROM users")
+                    users = cur.fetchall()
+                    #con.close()
+                    for user in users:
+                        if username in user and username in user:
+                            menuV1.Homepage()
+                            controller.close_frame()
+                        else:
+                            tm.showerror("Error", "Login has failed")
                 else:
                     tm.showerror("Error", "Wrong username or password")
             else:
@@ -152,6 +163,8 @@ class CreateAccount(tk.Frame):
                 if len(email) != 0:
                     if len(username_create) != 0:
                         if len(password_create) != 0:
+                            #createUser(self, name, password_create, email)
+
                             controller.show_frame("Login")
                             # self.destroy() -> extra window wordt aangemaakt
             else:
