@@ -18,6 +18,7 @@ class AddImage(Tk):
         gui = self
         gui.geometry("600x425")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         new_case_label = Label(gui, text="Add an Image", width=12, font=("bold", 15))
         new_case_label.place(x=230, y=53)

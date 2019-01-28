@@ -12,6 +12,7 @@ class Export(Tk):
         gui = self
         gui.geometry("500x250")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         export_label = Label(gui, text="Exporting File(s)", width=17, font=("bold", 15))
         export_label.place(x=148, y=43)

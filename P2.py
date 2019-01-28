@@ -167,5 +167,6 @@ class CreateAccount(tk.Frame):
 if __name__ == '__main__':
     test = HOAX()
     test.title("HOAX")
+    test.iconbitmap('Hoax.ico')
     test.geometry("500x500")
     test.mainloop()

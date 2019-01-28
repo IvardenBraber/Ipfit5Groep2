@@ -26,6 +26,7 @@ class Homepage(Tk):
 
         self.geometry('700x555')
         self.title('HOAX')
+        self.iconbitmap('Hoax.ico')
 
         # add menubar to the window and configure it
         menubar = Menu(self)

@@ -13,6 +13,7 @@ class CloseCase(Tk):
         gui = self
         gui.geometry("400x250")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         close_label = Label(gui, text="Close Case", width=10, font=("bold", 15))
         close_label.place(x=148, y=40)

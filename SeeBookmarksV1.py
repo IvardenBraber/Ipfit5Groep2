@@ -11,6 +11,7 @@ class Bookmark(Tk):
         gui = self
         gui.geometry("350x350")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         export_label = Label(gui, text="Bookmarked files", width=13, font=("bold", 16))
         export_label.place(x=110, y=43)

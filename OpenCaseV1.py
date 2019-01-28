@@ -18,6 +18,7 @@ class OpenCase(Tk):
         gui = self
         gui.geometry("400x250")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         new_case_label = Label(gui, text="Load Case", width=9, font=("bold", 15))
         new_case_label.place(x=148, y=53)

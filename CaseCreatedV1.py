@@ -12,6 +12,7 @@ class NewClassCreated(Tk):
         gui = self
         gui.geometry("500x250")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         new_class_label = Label(gui, text="New Case", width=14, font=("bold", 15))
         new_class_label.place(x=170, y=53)

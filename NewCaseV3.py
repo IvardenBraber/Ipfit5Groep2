@@ -17,6 +17,7 @@ class NewCase(Tk):
         gui = self
         gui.geometry("600x425")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         new_case_label = Label(gui, text="New Case", width=14, font=("bold", 15))
         new_case_label.place(x=215, y=53)

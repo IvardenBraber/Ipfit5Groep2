@@ -7,6 +7,7 @@ class CreateCaseError(Tk):
         gui = self
         gui.geometry("400x200")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         error_label = Label(gui, text="Error", width=15, font=("bold", 15))
         error_label.place(x=118, y=43)

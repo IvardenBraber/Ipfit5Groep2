@@ -7,6 +7,7 @@ class About(Tk):
         gui = self
         gui.geometry("400x250")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         about_label = Label(gui, text="About this tool", width=15, font=("bold", 15))
         about_label.place(x=118, y=43)

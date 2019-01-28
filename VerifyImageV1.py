@@ -8,6 +8,7 @@ class Verify(Tk):
         gui = self
         gui.geometry("500x250")
         gui.title("HOAX")
+        gui.iconbitmap('Hoax.ico')
 
         new_case_label = Label(gui, text="Verify your image", width=17, font=("bold", 15))
         new_case_label.place(x=148, y=43)
