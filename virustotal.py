@@ -24,6 +24,15 @@ import requests
 import urllib3
 
 
+malware_respons = []
+malware_hash = []
+malware_file = []
+
+input = {'e1112134b6dcc8bed54e0e34d8ac272795e73d74': 'file.txt',
+         'e1112134b6dcc8bed54e0e34d8ac272795e73f74': 'filee.txt',
+         'e1112134b6dcc8bed54e0e34d8ac272795e73dr4': 'fileee.txt'}
+
+
 def checkkey(kee):
     try:
         if len(kee) == 64:
@@ -75,57 +84,44 @@ def program_start():
 
 
 def main():
-    key = "ea44595e28b22f726e1fe8891943439afe787a180da42cf736f4200274b67931"
+    api_key = "ea44595e28b22f726e1fe8891943439afe787a180da42cf736f4200274b67931"
     hash = "e1112134b6dcc8bed54e0e34d8ac272795e73d74"
-    output = "virus.txt"
-    virus_malware = []
+
+
+    multiple_files = False
 
     # Run for a single hash + key
-    if hash and key:
-        file = open(output, 'w+')
-        file.write('Below is the identified malicious file.\n\n')
-        file.close()
-        virus_malware.append(VT_Request(key, hash.rstrip(), output))
+    if multiple_files == False:
+        VT_Request(api_key, hash)
     # Run for an input file + key
-    elif input and key:
-        file = open(output, 'w+')
-        file.write('Below are the identified malicious files.\n\n')
-        file.close()
-        with open(input) as o:
-            for line in o.readlines():
-                VT_Request(key, line.rstrip(), output)
-                if args.unlimited == 1:
-                    time.sleep(1)
-                else:
-                    time.sleep(26)
+    else:
+            for key in input:
+                VT_Request(api_key, key)
+
+    return malware_file
 
 
-def VT_Request(key, hash, output):
+def VT_Request(key, hash):
     params = {'apikey': key, 'resource': hash}
     url = requests.get('https://www.virustotal.com/vtapi/v2/file/report', params=params)
     json_response = url.json()
     #print(json_response)
+    file_malicous = False
     response = int(json_response.get('response_code'))
     if response == 0:
-        print(hash + ' is not in Virus Total')
-        file = open(output, 'a')
-        file.write(hash + ' is not in Virus Total')
-        file.write('\n')
-        file.close()
+        file_malicous = False
+
     elif response == 1:
         positives = int(json_response.get('positives'))
         if positives == 0:
-            print(hash + ' is not malicious')
-            file = open(output, 'a')
-            file.write(hash + ' is not malicious')
-            file.write('\n')
-            file.close()
+            file_malicous = False
+
         else:
-            print(hash + ' is malicious')
-            file = open(output, 'a')
-            file.write(hash + ' is malicious. Hit Count:' + str(positives))
-            file.write('\n')
-            file.close()
+            file_malicous = True
+            malware_hash.append(hash)
+            malware_file.append(input.get(hash))
+            malware_respons.append(json_response)
+
     else:
         print(hash + ' could not be searched. Please try again later.')
 
