@@ -95,28 +95,43 @@ class Login(tk.Frame):
             username = usernameEntry.get()
             password = passwordEntry.get()
 
+            errorMessage = False
+
             if len(username) != 0:
                 if len(password) != 0:
                     con = sqlite3.connect("database.db")
                     cur = con.cursor()
                     cur.execute("SELECT U_name, U_password FROM users")
                     users = cur.fetchall()
+                    con.close()
                     #con.close()
                     #for user in users:
                     for tuples in users:
+
                         if tuples[0] == username:
                             password = hashlib.md5(password.encode()).hexdigest()
                             if tuples[1] == password:
-                                menuV1.Homepage()
-                                controller.close_frame()
-                            else:
-                                print(tuples[1])
-                        else:
-                            print("test20")
+                                errorMessage = True
+
+                            #else:
+                            #    print(tuples[1])
+                            #    print("printing")
+
+                        #else:
+                        #    print("test#")
+                        #    errorMessage = False
+                        #    return errorMessage
                 else:
-                    tm.showerror("Error", "Wrong username or password")
+                    tm.showerror("Error", "Wrong username or password..")
             else:
-                tm.showerror("Error", "Wrong username or password")
+                tm.showerror("Error", "Wrong username or password...")
+
+            if errorMessage is True:
+                menuV1.Homepage()
+                controller.close_frame()
+
+            if errorMessage is False:
+                tm.showerror("Error", "Wrong username or password...")
 
 
 class CreateAccount(tk.Frame):
@@ -171,10 +186,22 @@ class CreateAccount(tk.Frame):
                 if len(email) != 0:
                     if len(username_create) != 0:
                         if len(password_create) != 0:
-                            DatabaseManager.createUser(DatabaseManager, name, password_create, email)
 
-                            controller.show_frame("Login")
-                            # self.destroy() -> extra window wordt aangemaakt
+                            con = sqlite3.connect("database.db")
+                            cur = con.cursor()
+                            usernameCheckExists = cur.execute("SELECT COUNT (*) FROM users WHERE U_name = ?", [username_create]).fetchone()
+                            con.close()
+                            print(usernameCheckExists)
+                            print(username_create)
+                            con.close()
+                            if usernameCheckExists[0] == 0:
+                                DatabaseManager.createUser(DatabaseManager, name, password_create, email)
+                                controller.show_frame("Login")
+
+                            else:
+                                tm.showerror("Error", "Incorrect values")
+                else:
+                    tm.showerror("Error", "Incorrect values")
             else:
                 tm.showerror("Error", "Incorrect values")
 
