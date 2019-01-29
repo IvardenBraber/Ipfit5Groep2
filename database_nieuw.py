@@ -110,9 +110,10 @@ class DatabaseManager:
 
     # CASES
     def createCase(self, caseFolder, image_number, imageLocation, serialNumber, dataCarrierNumber, createData, closedData):
-
-        self.cursor.execute("INSERT INTO cases (C_folder, image_number, image_location, serial_number, data_cariernumber, create_date, closed_date) VALUES (?,?,?,?,?,?,?)", (caseFolder, image_number, imageLocation, serialNumber, dataCarrierNumber, createData, closedData))
-        self.conn.commit()
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        cur.execute("INSERT INTO cases (C_folder, image_number, image_location, serial_number, data_cariernumber, create_date, closed_date) VALUES (?,?,?,?,?,?,?)", (caseFolder, image_number, imageLocation, serialNumber, dataCarrierNumber, createData, closedData))
+        con.commit()
 
     def getAllCaseIds(self):
         cases = []
@@ -129,37 +130,36 @@ class DatabaseManager:
         if result == None:
             return False
         else:
-            return result[0]
-        return False
+            return result[0] and False
+
     def getCaseSerialNumber(self, id):
         result = self.cursor.execute("SELECT serialNumber FROM cases WHERE C_number = ?", [id]).fetchone()
         if result == None:
             return False
         else:
-            return result[0]
-        return False
+            return result[0] and False
+
     def getCaseDataCarrierNumber(self, id):
         result = self.cursor.execute("SELECT dataCarrierNumber FROM cases WHERE C_number = ?", [id]).fetchone()
         if result == None:
             return False
         else:
-            return result[0]
-        return False
+            return result[0] and False
+
     def getCaseCreateDate(self, id):
         result = self.cursor.execute("SELECT createData FROM cases WHERE C_number = ?", [id]).fetchone()
         if result == None:
             return False
         else:
-            return result[0]
-        return False
+            return result[0] and False
+
 
     def getCaseClosedDate(self, id):
         result = self.cursor.execute("SELECT closed_date FROM cases WHERE C_number = ?", [id]).fetchone()
         if result == None:
             return False
         else:
-            return result[0]
-        return False
+            return result[0] and False
 
     def setCaseClosedDate(self, id, closedDate):
         self.cursor.execute("UPDATE cases SET closed_date = ? WHERE C_number = ?", (closedDate, id))
@@ -170,8 +170,7 @@ class DatabaseManager:
         if result == None:
             return False
         else:
-            return result[0]
-        return False
+            return result[0] and False
 
     def getCaseImageNumber(self, id):
         result = self.cursor.execute("SELECT image_number FROM cases WHERE C_number = ?", [id]).fetchone()
@@ -179,9 +178,9 @@ class DatabaseManager:
         if result == None:
             return False
         else:
-            return result[0]
+            return result[0] and False
 
-        return False
+
 
     # EVIDENCE
     def createEvidence(self, caseNumber, hashValue, bookmark, benign, notes):

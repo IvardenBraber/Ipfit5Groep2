@@ -1,10 +1,17 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+import sqlite3
+
 #from case import case
 
 import menuV1
 import CaseCreatedV1
+from database_nieuw import DatabaseManager
+import case
+import AddImageV2
+import datetime
+import time
 
 def browsefunction(self):
     filedirectory = filedialog.askdirectory()
@@ -60,8 +67,12 @@ class NewCase(Tk):
         #cFolder = cb.get()
         #cSummary = db.get()
 
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+
         e = ttk.Button(gui, text="Create Case", width=11,
-                       command=lambda: [self.destroy(), CaseCreatedV1.NewClassCreated()]) #, (case(cInfo, cFolder, cSummary))]) #lambda toegevoegd, is dit nodig?
+                       command=lambda: [DatabaseManager.createCase(DatabaseManager, getcasename(), 0, getimagelocation(), 0, 0, datetime.datetime.now(), datetime.datetime.now()),
+                                        self.destroy(), CaseCreatedV1.NewClassCreated()]) #"#, print(getcasename(),getcasesummary(), getimagelocation(), datetime.datetime.now())])
         e.place(x=285, y=300)
 
         f = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)

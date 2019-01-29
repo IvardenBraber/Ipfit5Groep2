@@ -24,3 +24,4 @@ class case:
         self.case_summary = new_value
     def set_date(self):
         self.date = datetime.datetime.now()
+
