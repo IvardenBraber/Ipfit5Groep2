@@ -76,15 +76,16 @@ def program_start():
 
 def main():
     key = "ea44595e28b22f726e1fe8891943439afe787a180da42cf736f4200274b67931"
-    hash = "7f79cdba46407d0bae493d283367eeda"
+    hash = "e1112134b6dcc8bed54e0e34d8ac272795e73d74"
     output = "virus.txt"
+    virus_malware = []
 
     # Run for a single hash + key
     if hash and key:
         file = open(output, 'w+')
         file.write('Below is the identified malicious file.\n\n')
         file.close()
-        VT_Request(key, hash.rstrip(), output)
+        virus_malware.append(VT_Request(key, hash.rstrip(), output))
     # Run for an input file + key
     elif input and key:
         file = open(output, 'w+')
@@ -103,7 +104,7 @@ def VT_Request(key, hash, output):
     params = {'apikey': key, 'resource': hash}
     url = requests.get('https://www.virustotal.com/vtapi/v2/file/report', params=params)
     json_response = url.json()
-    print(json_response)
+    #print(json_response)
     response = int(json_response.get('response_code'))
     if response == 0:
         print(hash + ' is not in Virus Total')
