@@ -100,7 +100,8 @@ class Login(tk.Frame):
                     users = cur.fetchall()
                     #con.close()
                     for user in users:
-                        if username in user and username in user:
+                        #herkent password niet bij het inloggen
+                        if username in user and password in user:
                             menuV1.Homepage()
                             controller.close_frame()
                         else:
