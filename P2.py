@@ -4,6 +4,9 @@ import menuV1
 import LogoutV1
 
 import sqlite3
+import hashlib
+from database_nieuw import DatabaseManager
+
 import main_nieuw
 # import LoginCheckV1 #toegevoegd
 # onderaan toegevoegd
@@ -99,13 +102,17 @@ class Login(tk.Frame):
                     cur.execute("SELECT U_name, U_password FROM users")
                     users = cur.fetchall()
                     #con.close()
-                    for user in users:
-                        #herkent password niet bij het inloggen
-                        if username in user and password in user:
-                            menuV1.Homepage()
-                            controller.close_frame()
+                    #for user in users:
+                    for tuples in users:
+                        if tuples[0] == username:
+                            password = hashlib.md5(password.encode()).hexdigest()
+                            if tuples[1] == password:
+                                menuV1.Homepage()
+                                controller.close_frame()
+                            else:
+                                print(tuples[1])
                         else:
-                            tm.showerror("Error", "Login has failed")
+                            print("test20")
                 else:
                     tm.showerror("Error", "Wrong username or password")
             else:
@@ -164,7 +171,7 @@ class CreateAccount(tk.Frame):
                 if len(email) != 0:
                     if len(username_create) != 0:
                         if len(password_create) != 0:
-                            #createUser(self, name, password_create, email)
+                            DatabaseManager.createUser(DatabaseManager, name, password_create, email)
 
                             controller.show_frame("Login")
                             # self.destroy() -> extra window wordt aangemaakt

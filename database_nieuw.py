@@ -61,11 +61,12 @@ class DatabaseManager:
     # USERS
     def createUser(self, name, password, email):
         hashedpassword = hashlib.md5(password.encode()).hexdigest()
-        if self.getUserId(email) is not False:
+        if self.getUserId(self, email) is not False:
             return "Email already registered"
-
-        self.cursor.execute("INSERT INTO users (U_name, U_password, U_mail) VALUES (?,?,?)", (name, hashedpassword, email))
-        self.conn.commit()
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        cur.execute("INSERT INTO users (U_name, U_password, U_mail) VALUES (?,?,?)", (name, hashedpassword, email))
+        con.commit()
 
     def userAuthenticate(self, email, password):
         passwordRight = False
@@ -86,7 +87,9 @@ class DatabaseManager:
         return passwordRight
 
     def getUserId(self, email):
-        result = self.cursor.execute("SELECT U_id FROM users WHERE U_mail = ?", [email]).fetchone()
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        result = cur.execute("SELECT U_id FROM users WHERE U_mail = ?", [email]).fetchone()
         if result == None:
             return False
         else:
