@@ -1,5 +1,7 @@
 from tkinter import *
 
+import hashlib as hash
+
 # import verifyTest
 
 class Verify(Tk):
@@ -19,6 +21,18 @@ class Verify(Tk):
 
         cc = Button(gui, text="Verify your image(s)..") # command=lambda: verifyTest.Listbox)
         cc.place(x=180, y=146)
+
+        # BLOCKSIZE = 65536
+        #
+        # sha = hash.sha1()
+        #
+        # with open('C:\\Users\\aliso\\Downloads\\image.dd', 'rb') as imagefile:
+        #     file_buffer = imagefile.read(BLOCKSIZE)
+        #     while len(file_buffer) > 0:
+        #         sha.update(file_buffer)
+        #         file_buffer = imagefile.read(BLOCKSIZE)
+        #
+        #     print(sha.hexdigest())
 
     def __init__(self):
         Tk.__init__(self)
