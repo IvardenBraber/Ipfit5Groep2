@@ -6,6 +6,9 @@ from tkinter import filedialog
 import menuV1
 import iterating_image_files
 
+from menuV1 import *
+
+
 def browsefunction(self):
     file = filedialog.askopenfilename()
     self.directorypath.set(file)
@@ -13,8 +16,6 @@ def browsefunction(self):
 image_list = [' TEST  ']
 image_loaded = False
 
-def destroyWindow(window):
-    window.destroy()
 
 class AddImage(Tk):
     def addimagewindow(self):
@@ -79,7 +80,7 @@ class AddImage(Tk):
         b = ttk.Button(gui, text="Add Image", width=11,
                        command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), defineImageList(self),
                                         image_loaded_true(),
-                                        self.after(10, self.destroy(), menuV1.Homepage().update)]) #, menuV1.Homepage().update)])
+                                        self.after(1000, self.destroy(), menuV1.Homepage())]) #, menuV1.Homepage().update)]) #, menuV1.Homepage().update)])
 
         b.place(x=295, y=345)
 
