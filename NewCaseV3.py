@@ -39,14 +39,10 @@ class NewCase(Tk):
             casename = ab.get()
             return casename
 
-        c = Label(gui, text="Case Folder:", width=12)
+        c = Label(gui, text="Employee number:", width=14)
         c.place(x=100, y=180)
 
-        cc = Button(gui, text="Browse..", command=lambda: browsefunction(self))
-        cc.place(x=375, y=176)
-
-        self.directorypath = StringVar()
-        cb = Entry(gui, textvariable=self.directorypath)
+        cb = Entry(gui)
         cb.place(x=230, y=180)
 
         def getimagelocation():

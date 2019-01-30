@@ -23,14 +23,10 @@ class OpenCase(Tk):
         new_case_label = Label(gui, text="Load Case", width=9, font=("bold", 15))
         new_case_label.place(x=148, y=53)
 
-        c = Label(gui, text="Case Location:", width=15)
+        c = Label(gui, text="Case Name:", width=15)
         c.place(x=15, y=130)
 
-        cc = Button(gui, text="Browse..", command=lambda: browsefunction(self))
-        cc.place(x=274, y=126)
-
-        self.directorypath = StringVar()
-        cb = Entry(gui, textvariable=self.directorypath)
+        cb = Entry(gui)
         cb.place(x=136, y=130)
 
         e = ttk.Button(gui, text="Open Case", width=11, command=lambda: self.destroy())
