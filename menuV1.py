@@ -27,6 +27,8 @@ class Homepage(Tk):
         self.geometry('700x555')
         self.title('HOAX')
         self.iconbitmap('Hoax.ico')
+        self.attributes("-topmost", True)
+        self.after_idle(self.attributes, '-topmost', False)
 
         # add menubar to the window and configure it
         menubar = Menu(self)
@@ -151,6 +153,8 @@ class Homepage(Tk):
 
             for item in list:
                 listbox.insert(END, item)
+
+
 
 
         #for item in list:
