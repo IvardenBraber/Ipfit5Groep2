@@ -5,7 +5,7 @@ from tkinter import ttk
 
 import menuV1
 import P2
-
+import OpenCaseV1
 
 class CloseCase(Tk):
 
@@ -21,9 +21,13 @@ class CloseCase(Tk):
         a = Label(gui, text="Are you sure you want to close this case?", width=41)
         a.place(x=60, y=110)
 
-        b = ttk.Button(gui, text="YES", width=10, command=lambda: self.destroy())
+        b = ttk.Button(gui, text="YES", width=10, command=lambda: [setZero(), self.destroy()])
             #[P2.HOAX(self.geometry("500x500")), self.destroy()]) #geometry niet werkend
         b.place(x=205, y=175)
+
+        def setZero():
+            OpenCaseV1.caseId = 0
+            menuV1.Homepage()
 
         c = ttk.Button(gui, text="NO", width=10, command=self.destroy)
         c.place(x=120, y=175)

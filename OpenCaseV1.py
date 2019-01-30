@@ -7,6 +7,7 @@ import tkinter.messagebox as tm
 import menuV1
 import CaseCreatedV1
 from database_nieuw import DatabaseManager
+import menuV1
 
 
 
@@ -51,18 +52,19 @@ class OpenCase(Tk):
             name = cb.get()
             #check of de naam bestaat
 
+
+
             print(DatabaseManager.getCaseId(DatabaseManager, name))
+            print(DatabaseManager.getCaseFolder(DatabaseManager, DatabaseManager.getCaseId(DatabaseManager, name)))
 
             if DatabaseManager.getCaseId(DatabaseManager, name) == False:
                 tm.showerror("Error", "Incorrect case name")
             else:
-
-                caseId = DatabaseManager.getUserName(DatabaseManager, name)
-                print(caseId)
+                caseId = DatabaseManager.getCaseId(DatabaseManager, name)
+                print(DatabaseManager.getCaseId(DatabaseManager, name))
                 self.destroy()
+                menuV1.Homepage()
 
-            print(caseId)
-            print(DatabaseManager.getCaseFolder(DatabaseManager, int(caseId)))
 
 
 

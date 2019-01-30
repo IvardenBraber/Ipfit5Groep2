@@ -36,11 +36,11 @@ class Homepage(Tk):
         menubar = Menu(self)
         self.menuBar = Menu(master=self)
         self.case = Menu(self.menuBar, tearoff=0)
-        self.case.add_command(label="New Case...", command=lambda: NewCaseV3.NewCase())
+        self.case.add_command(label="New Case...", command=lambda: [self.destroy(), NewCaseV3.NewCase()])
         # command=lambda: newCase.createNewCase(self))  # add commands!
 
-        self.case.add_command(label="Open Existing Case...", command=lambda: OpenCaseV1.OpenCase())
-        self.case.add_command(label="Close Case...", command=lambda: [self.destroy, CloseCaseV1.CloseCase()])
+        self.case.add_command(label="Open Existing Case...", command=lambda: [self.destroy(), OpenCaseV1.OpenCase()])
+        self.case.add_command(label="Close Case...", command=lambda: [self.destroy(), CloseCaseV1.CloseCase()])
 
         self.evidence = Menu(menubar, tearoff=0)
         self.evidence.add_command(label="Add Image...", command=lambda: [self.destroy(), AddImageV2.AddImage()])
@@ -81,11 +81,12 @@ class Homepage(Tk):
         #
         # # adding the export label
 
+        print(DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId))
 
         if OpenCaseV1.caseId == 0 or DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId) == False:
             case_naam = 'No case name yet'
         else:
-            case_naam = str(DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId))
+            case_naam = DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId)
 
         #current_user = DatabaseManager.getUserName(DatabaseManager, 1)
 
