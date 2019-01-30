@@ -30,6 +30,8 @@ class HOAX(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
+        new_database = DatabaseManager()
+
         self.frame = {}
         for F in (Main, CreateAccount, Login):
             page_name = F.__name__

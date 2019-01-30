@@ -18,6 +18,8 @@ import ExportFilesWindowV1
 import bookmarkV1
 import SeeBookmarksV1
 import AddImageV2
+from database_nieuw import DatabaseManager
+
 
 
 class Homepage(Tk):
@@ -41,7 +43,7 @@ class Homepage(Tk):
         self.case.add_command(label="Close Case...", command=lambda: [self.destroy, CloseCaseV1.CloseCase()])
 
         self.evidence = Menu(menubar, tearoff=0)
-        self.evidence.add_command(label="Add Image...", command=lambda: AddImageV2.AddImage())
+        self.evidence.add_command(label="Add Image...", command=lambda: [self.destroy(), AddImageV2.AddImage()])
         self.evidence.add_command(label="Verify Image...", command=lambda: VerifyImageV1.Verify())
 
         self.options = Menu(menubar, tearoff=0)
@@ -78,8 +80,22 @@ class Homepage(Tk):
         left_pane.grid(row=0, column=0)
         #
         # # adding the export label
-        left_label = Label(left_pane, text="Exported files")
+
+
+        if OpenCaseV1.caseId == 0 or DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId) == False:
+            case_naam = 'No case name yet'
+        else:
+            case_naam = str(DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId))
+
+        #current_user = DatabaseManager.getUserName(DatabaseManager, 1)
+
+
+        print(case_naam)
+        left_label = Label(left_pane, text="Case Name: "+case_naam)
         left_label.grid(row=0, column=10)
+
+        left_label2 = Label(left_pane, text="User: ")
+        left_label2.grid(row=1, column=10)
         #
         # # adding the export button
         #right_button = Button(right_pane, text="Export ALL files with hash warnings"
@@ -98,17 +114,7 @@ class Homepage(Tk):
 
         path = os.path.basename("C:")
 
-        treeview = ttk.Treeview(right_pane)
-        treeview.place(x=70, y=300)
-        treeview["columns"] = "one"
-        treeview.column("one", width=200)
-        #treeview.column("two", width=100)
-        treeview.heading("one", text="path")
-        #
-        self.path = os.getcwd()
-        #
-        in_treeviewdata = treeview.insert(path, 1, "dir1", text="Example 1")
-        treeview.insert(in_treeviewdata, "end", "dir 2", text="sub dir 2", values="Home")
+
 
         def klik(event):
 
