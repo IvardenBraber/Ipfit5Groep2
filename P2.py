@@ -3,6 +3,7 @@ import tkinter as tk
 import menuV1
 import LogoutV1
 
+
 import sqlite3
 import hashlib
 from database_nieuw import DatabaseManager
@@ -104,6 +105,7 @@ class Login(tk.Frame):
                     cur.execute("SELECT U_name, U_password FROM users")
                     users = cur.fetchall()
                     con.close()
+                    #cur.close()
                     #con.close()
                     #for user in users:
                     for tuples in users:
@@ -187,19 +189,20 @@ class CreateAccount(tk.Frame):
                     if len(username_create) != 0:
                         if len(password_create) != 0:
 
-                            con = sqlite3.connect("database.db")
+                            con = sqlite3.connect("database.db", timeout=1)
                             cur = con.cursor()
                             usernameCheckExists = cur.execute("SELECT COUNT (*) FROM users WHERE U_name = ?", [username_create]).fetchone()
                             con.close()
                             print(usernameCheckExists)
                             print(username_create)
-                            con.close()
+
                             if usernameCheckExists[0] == 0:
                                 DatabaseManager.createUser(DatabaseManager, name, password_create, email)
                                 controller.show_frame("Login")
 
                             else:
                                 tm.showerror("Error", "Incorrect values")
+
                 else:
                     tm.showerror("Error", "Incorrect values")
             else:

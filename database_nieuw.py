@@ -67,6 +67,7 @@ class DatabaseManager:
         cur = con.cursor()
         cur.execute("INSERT INTO users (U_name, U_password, U_mail) VALUES (?,?,?)", (name, hashedpassword, email))
         con.commit()
+        con.close()
 
     def userAuthenticate(self, email, password):
         passwordRight = False
@@ -90,10 +91,13 @@ class DatabaseManager:
         con = sqlite3.connect("database.db")
         cur = con.cursor()
         result = cur.execute("SELECT U_id FROM users WHERE U_mail = ?", [email]).fetchone()
+        con.close()
         if result == None:
             return False
         else:
             return result[0]
+
+
     def getUserName(self, userid):
         result = self.cursor.execute("SELECT U_name FROM users WHERE U_id = ?", [userid]).fetchone()
         if result == None:
@@ -114,6 +118,7 @@ class DatabaseManager:
         cur = con.cursor()
         cur.execute("INSERT INTO cases (C_folder, image_number, image_location, serial_number, data_cariernumber, create_date, closed_date) VALUES (?,?,?,?,?,?,?)", (caseFolder, image_number, imageLocation, serialNumber, dataCarrierNumber, createData, closedData))
         con.commit()
+        con.close()
 
     def getAllCaseIds(self):
         cases = []
