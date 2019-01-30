@@ -87,10 +87,10 @@ class DatabaseManager:
 
         return passwordRight
 
-    def getUserId(self, email):
+    def getUserId(self, username):
         con = sqlite3.connect("database.db")
         cur = con.cursor()
-        result = cur.execute("SELECT U_id FROM users WHERE U_mail = ?", [email]).fetchone()
+        result = cur.execute("SELECT U_id FROM users WHERE U_mail = ?", [username]).fetchone()
         con.close()
         if result == None:
             return False
@@ -99,17 +99,22 @@ class DatabaseManager:
 
 
     def getUserName(self, userid):
-        result = self.cursor.execute("SELECT U_name FROM users WHERE U_id = ?", [userid]).fetchone()
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        result = cur.execute("SELECT U_name FROM users WHERE U_id = ?", [userid]).fetchone()
         if result == None:
             return False
         else:
-            return result[0]
+            return result
+        con.commit()
+        con.close()
+
     def getUserEmail(self, userid):
         result = self.cursor.execute("SELECT U_mail FROM users WHERE U_id = ?", [userid]).fetchone()
         if result == None:
             return False
         else:
-            return result[0]
+            return result
 
 
     # CASES
@@ -129,6 +134,18 @@ class DatabaseManager:
             cases.append(caseId)
 
         return cases
+
+    def getCaseId(self, name):
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        result = cur.execute("SELECT C_number FROM cases WHERE C_folder = ?", [name]).fetchone()
+        con.commit()
+        con.close()
+        if result == None:
+            return False
+        else:
+            return result[0]
+
 
     def getCaseImageLocation(self, id):
         result = self.cursor.execute("SELECT image_location FROM cases WHERE C_number = ?", [id]).fetchone()
@@ -159,6 +176,7 @@ class DatabaseManager:
             return result[0] and False
 
 
+
     def getCaseClosedDate(self, id):
         result = self.cursor.execute("SELECT closed_date FROM cases WHERE C_number = ?", [id]).fetchone()
         if result == None:
@@ -171,11 +189,16 @@ class DatabaseManager:
         self.conn.commit()
 
     def getCaseFolder(self, id):
-        result = self.cursor.execute("SELECT C_folder FROM cases WHERE C_number = ?", [id]).fetchone()
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        result = cur.execute("SELECT C_folder FROM cases WHERE C_number = ?", [id]).fetchone()
+        con.commit()
+        con.close()
         if result == None:
             return False
         else:
-            return result[0] and False
+            return result[0]
+
 
     def getCaseImageNumber(self, id):
         result = self.cursor.execute("SELECT image_number FROM cases WHERE C_number = ?", [id]).fetchone()

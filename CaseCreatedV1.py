@@ -12,6 +12,8 @@ class NewClassCreated(Tk):
         gui = self
         gui.geometry("500x250")
         gui.title("HOAX")
+        self.attributes("-topmost", True)
+        self.after_idle(self.attributes, '-topmost', False)
         gui.iconbitmap('Hoax.ico')
 
         new_class_label = Label(gui, text="New Case", width=14, font=("bold", 15))
@@ -24,7 +26,7 @@ class NewClassCreated(Tk):
                        command=lambda: [self.destroy(), AddImageV2.AddImage()])
         b.place(x=235, y=175)
 
-        c = ttk.Button(gui, text="Close", width=7, command=self.destroy)
+        c = ttk.Button(gui, text="Close", width=7, command=lambda: [menuV1.Homepage(), self.destroy()])
         c.place(x=170, y=175)
 
     def __init__(self):

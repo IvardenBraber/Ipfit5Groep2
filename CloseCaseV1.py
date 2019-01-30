@@ -7,6 +7,12 @@ import menuV1
 import P2
 import OpenCaseV1
 
+from menuV1 import *
+
+def test():
+    menuV1.AddImageV2.image_loaded = False
+    print(menuV1.AddImageV2.image_loaded)
+
 class CloseCase(Tk):
 
     def closecasewindow(self):
@@ -27,9 +33,10 @@ class CloseCase(Tk):
 
         def setZero():
             OpenCaseV1.caseId = 0
-            menuV1.Homepage()
+            test()
+            P2.HOAX()
 
-        c = ttk.Button(gui, text="NO", width=10, command=self.destroy)
+        c = ttk.Button(gui, text="NO", width=10, command=lambda: [menuV1.Homepage(), self.destroy()])
         c.place(x=120, y=175)
 
     def __init__(self):

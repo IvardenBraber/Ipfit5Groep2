@@ -84,7 +84,7 @@ class AddImage(Tk):
 
         b.place(x=295, y=345)
 
-        c = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
+        c = ttk.Button(gui, text="Go Back", width=7, command=lambda: [menuV1.Homepage(), self.destroy()])
         c.place(x=220, y=345)
 
         def image_loaded_true():

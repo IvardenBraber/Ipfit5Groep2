@@ -84,7 +84,7 @@ class Homepage(Tk):
         print(DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId))
 
         if OpenCaseV1.caseId == 0 or DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId) == False:
-            case_naam = 'No case name yet'
+            case_naam = 'No case...'
         else:
             case_naam = DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId)
 

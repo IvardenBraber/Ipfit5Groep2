@@ -19,7 +19,7 @@ class Verify(Tk):
                             "It will hash the images to ensure nothing has changed.", width=128)
         a.place(x=-200, y=100)
 
-        cc = Button(gui, text="Verify your image(s)..") # command=lambda: verifyTest.Listbox)
+        cc = Button(gui, text="Verify your raw type image(s)") # command=lambda: verifyTest.Listbox)
         cc.place(x=180, y=146)
 
         # BLOCKSIZE = 65536

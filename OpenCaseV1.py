@@ -41,15 +41,18 @@ class OpenCase(Tk):
         cb = Entry(gui)
         cb.place(x=136, y=130)
 
-        e = ttk.Button(gui, text="Open Case", width=11, command=lambda: [setCaseName()])
+        e = ttk.Button(gui, text="Open Case", width=11, command=lambda: [setCaseName(getCaseName())])
         e.place(x=185, y=200)
 
-        f = ttk.Button(gui, text="Go Back", width=7, command=self.destroy)
+        def getCaseName():
+            name = cb.get()
+            return name
+        f = ttk.Button(gui, text="Go Back", width=7, command=lambda: [menuV1.Homepage(), self.destroy()])
         f.place(x=125, y=200)
 
-        def setCaseName():
+        def setCaseName(input_name):
             global caseId
-            name = cb.get()
+            name = input_name
             #check of de naam bestaat
 
 
