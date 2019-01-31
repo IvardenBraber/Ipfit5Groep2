@@ -5,8 +5,13 @@ from tkinter import ttk
 import menuV1
 import AddImageV2
 
+casename = ''
 
 class NewClassCreated(Tk):
+
+    def save_casename(new_casename):
+        global casename
+        casename = new_casename
 
     def newclasscreated(self):
         gui = self
@@ -22,11 +27,12 @@ class NewClassCreated(Tk):
         a = Label(gui, text="The new case has been created. \n You can now either close this window or click next to add an image.", width=102)
         a.place(x=-105, y=110)
 
+        global casename
         b = ttk.Button(gui, text="Add Image", width=11,
-                       command=lambda: [self.destroy(), AddImageV2.AddImage()])
+                       command=lambda: [AddImageV2.AddImage.save_casename(casename), self.destroy(), AddImageV2.AddImage()])
         b.place(x=235, y=175)
 
-        c = ttk.Button(gui, text="Close", width=7, command=lambda: [menuV1.Homepage(), self.destroy()])
+        c = ttk.Button(gui, text="Close", width=7, command=lambda: [menuV1.Homepage.save_casename(casename), menuV1.Homepage(), self.destroy()])
         c.place(x=170, y=175)
 
     def __init__(self):

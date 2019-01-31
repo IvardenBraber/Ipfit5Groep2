@@ -15,12 +15,18 @@ def browsefunction(self):
 
 image_list = [' TEST  ']
 image_loaded = False
-
+casename = ''
 
 class AddImage(Tk):
+    def save_casename(new_casename):
+        global casename
+        casename = new_casename
+
     def addimagewindow(self):
         gui = self
         gui.geometry("600x425")
+        self.attributes("-topmost", True)
+        self.after_idle(self.attributes, '-topmost', False)
         gui.title("HOAX")
         gui.iconbitmap('Hoax.ico')
 
@@ -79,13 +85,17 @@ class AddImage(Tk):
 
         b = ttk.Button(gui, text="Add Image", width=11,
                        command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), defineImageList(self),
-                                        image_loaded_true(),
+                                        image_loaded_true(), menuV1.Homepage.set_Opencase_False(self), menuV1.Homepage.save_casename(casename),
                                         self.after(1000, self.destroy(), menuV1.Homepage())]) #, menuV1.Homepage().update)]) #, menuV1.Homepage().update)])
 
         b.place(x=295, y=345)
 
         c = ttk.Button(gui, text="Go Back", width=7, command=lambda: [menuV1.Homepage(), self.destroy()])
         c.place(x=220, y=345)
+
+        global casename
+        if casename == '':
+            casename = menuV1.Homepage.get_case_name_global(self)
 
         def image_loaded_true():
             global image_loaded

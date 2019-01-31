@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 #from case import case
+import tkinter.messagebox as tm
+
 
 # os import
 import os
@@ -11,7 +13,6 @@ import AboutV1
 import LogoutV1
 import CloseCaseV1
 import OpenCaseV1
-import AddImageV2
 import NewCaseV3
 import VerifyImageV1
 import ExportFilesWindowV1
@@ -21,14 +22,29 @@ import AddImageV2
 import P2
 from database_nieuw import DatabaseManager
 
-
+Opencase = True
 usable_username = ''
+casename = ''
+case_loaded = False
+
 
 class Homepage(Tk):
 
     def save_username(username):
         global usable_username
         usable_username = username
+
+    def save_casename(new_casename):
+        global casename
+        casename = new_casename
+
+    def set_Opencase_False(self):
+        global Opencase
+        Opencase = False
+
+    def set_Opencase_True(self):
+        global Opencase
+        Opencase = True
 
     def widgetsdesign(self):
 
@@ -49,8 +65,28 @@ class Homepage(Tk):
         self.case.add_command(label="Close Case...", command=lambda: [self.destroy(), CloseCaseV1.CloseCase()])
 
         self.evidence = Menu(menubar, tearoff=0)
-        self.evidence.add_command(label="Add Image...", command=lambda: [self.destroy(), AddImageV2.AddImage()])
+        self.evidence.add_command(label="Add Image...", command=lambda: image_loaded_check())
         self.evidence.add_command(label="Verify Image...", command=lambda: VerifyImageV1.Verify())
+
+        def image_loaded_check():
+            if AddImageV2.image_loaded == True or case_loaded == False:
+                if case_loaded == False:
+                    NewCaseV3.NewCase()
+                    tm.showerror("Error", "No case found")
+                    self.destroy()
+                elif AddImageV2.image_loaded == True:
+                    tm.showerror("Error", "Image already added...")
+            else:
+                AddImageV2.AddImage()
+                self.destroy()
+
+        # def image_loaded_check():
+        #     if AddImageV2.image_loaded == True:
+        #
+        #         tm.showerror("Error", "Image already added...")
+        #     else:
+        #         AddImageV2.AddImage()
+        #         self.destroy()
 
         self.options = Menu(menubar, tearoff=0)
         self.options.add_command(label="Bookmarks...", command=lambda: SeeBookmarksV1.Bookmark())
@@ -86,19 +122,27 @@ class Homepage(Tk):
         left_pane.grid(row=0, column=0)
         #
         # # adding the export label
+        global casename
+        print(casename)
 
         print(DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId))
 
-        if OpenCaseV1.caseId == 0 or DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId) == False:
-            case_naam = 'No case...'
+        if Opencase == True:
+            if OpenCaseV1.caseId == 0 or DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId) == False:
+                casename = 'No case...'
+            else:
+                casename = DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId)
+
+            #current_user = DatabaseManager.getUserName(DatabaseManager, 1)
+
+        global case_loaded
+        if casename == 'No case...':
+            case_loaded = False
         else:
-            case_naam = DatabaseManager.getCaseFolder(DatabaseManager, OpenCaseV1.caseId)
+            case_loaded = True
 
-        #current_user = DatabaseManager.getUserName(DatabaseManager, 1)
-
-
-        print(case_naam)
-        left_label = Label(left_pane, text="Case Name: "+case_naam)
+        print(casename)
+        left_label = Label(left_pane, text="Case Name: "+casename)
         left_label.grid(row=0, column=10)
 
 
@@ -123,7 +167,6 @@ class Homepage(Tk):
         # # creating an configuring tree view
 
         path = os.path.basename("C:")
-
 
 
         def klik(event):
@@ -178,6 +221,11 @@ class Homepage(Tk):
 
         listbox.place(x=25, y=100)
         listbox.bind("<Double-1>", klik)
+
+    def get_case_name_global(self):
+        global casename
+        return casename
+
 
     def __init__(self):
         Tk.__init__(self)

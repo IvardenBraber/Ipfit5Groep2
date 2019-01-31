@@ -65,6 +65,7 @@ class OpenCase(Tk):
             else:
                 caseId = DatabaseManager.getCaseId(DatabaseManager, name)
                 print(DatabaseManager.getCaseId(DatabaseManager, name))
+                menuV1.Homepage.set_Opencase_True(self)
                 self.destroy()
                 menuV1.Homepage()
 

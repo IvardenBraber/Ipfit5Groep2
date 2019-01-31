@@ -14,6 +14,8 @@ import datetime
 import time
 from OpenCaseV1 import OpenCase
 
+
+
 def browsefunction(self):
     filedirectory = filedialog.askdirectory()
     self.directorypath.set(filedirectory)
@@ -25,6 +27,8 @@ class NewCase(Tk):
         gui = self
         gui.geometry("600x425")
         gui.title("HOAX")
+        self.attributes("-topmost", True)
+        self.after_idle(self.attributes, '-topmost', False)
         gui.iconbitmap('Hoax.ico')
 
         new_case_label = Label(gui, text="New Case", width=14, font=("bold", 15))
@@ -69,9 +73,10 @@ class NewCase(Tk):
 
         e = ttk.Button(gui, text="Create Case", width=11,
                        command=lambda: [DatabaseManager.createCase(DatabaseManager, getcasename(), 0, getimagelocation(), 0, 0, datetime.datetime.now(), datetime.datetime.now()),
-
+                                        CaseCreatedV1.NewClassCreated.save_casename(getcasename()), print(getcasename()), menuV1.Homepage.set_Opencase_False(self),
                                         self.destroy(), CaseCreatedV1.NewClassCreated()]) #"#, print(getcasename(),getcasesummary(), getimagelocation(), datetime.datetime.now())])
         e.place(x=285, y=300)
+
 
         f = ttk.Button(gui, text="Go Back", width=7, command=lambda: [menuV1.Homepage(), self.destroy()])
         f.place(x=205, y=300)

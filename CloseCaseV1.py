@@ -19,6 +19,8 @@ class CloseCase(Tk):
         gui = self
         gui.geometry("400x250")
         gui.title("HOAX")
+        self.attributes("-topmost", True)
+        self.after_idle(self.attributes, '-topmost', False)
         gui.iconbitmap('Hoax.ico')
 
         close_label = Label(gui, text="Close Case", width=10, font=("bold", 15))
@@ -35,6 +37,7 @@ class CloseCase(Tk):
             OpenCaseV1.caseId = 0
             test()
             P2.HOAX()
+            menuV1.Homepage.set_Opencase_True(self)
 
         c = ttk.Button(gui, text="NO", width=10, command=lambda: [menuV1.Homepage(), self.destroy()])
         c.place(x=120, y=175)
