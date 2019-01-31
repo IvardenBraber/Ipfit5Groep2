@@ -3,8 +3,13 @@ from tkinter import *
 import hashlib as hash
 
 from tkinter import ttk
+from tkinter import filedialog
 
 # import verifyTest
+
+def browsefunction(self):
+    file = filedialog.askopenfilename()
+    self.directorypath.set(file)
 
 class Verify(Tk):
 
