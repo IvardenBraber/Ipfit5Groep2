@@ -54,8 +54,10 @@ class image_stored_list():
         print("[+] Opening {}".format(image))
         if img_type == "ewf":
             try:
-                image = image.split('/')
-                image = image[len(image) - 1]
+                #image = image.split('/')
+                #image = image[len(image) - 1]
+                image = image.replace('/', '\\')
+                print(image)
                 filenames = pyewf.glob(image)
             except IOError:
                 _, e, _ = sys.exc_info()
