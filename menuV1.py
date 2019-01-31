@@ -18,11 +18,17 @@ import ExportFilesWindowV1
 import bookmarkV1
 import SeeBookmarksV1
 import AddImageV2
+import P2
 from database_nieuw import DatabaseManager
 
 
+usable_username = ''
 
 class Homepage(Tk):
+
+    def save_username(username):
+        global usable_username
+        usable_username = username
 
     def widgetsdesign(self):
 
@@ -52,7 +58,7 @@ class Homepage(Tk):
         self.options.add_command(label="Log out...", command=lambda: [self.destroy(), LogoutV1.Logout()])
 
         self.help = Menu(menubar, tearoff=0)
-        self.help.add_command(label="About...", command=lambda: AboutV1.About())
+        self.help.add_command(label="About...", command=lambda: [AboutV1.About(), print(P2.pass_username)])
 
         # make sure all's added to the menuBar to work
         self.menuBar.add_cascade(label="Case", menu=self.case)
@@ -95,7 +101,10 @@ class Homepage(Tk):
         left_label = Label(left_pane, text="Case Name: "+case_naam)
         left_label.grid(row=0, column=10)
 
-        left_label2 = Label(left_pane, text="User: ")
+
+        global usable_username
+
+        left_label2 = Label(left_pane, text="User: "+usable_username)
         left_label2.grid(row=1, column=10)
         #
         # # adding the export button
@@ -149,7 +158,7 @@ class Homepage(Tk):
         listbox = Listbox(right_pane, width=75)
 
         if AddImageV2.image_loaded == False:
-            list = ['Test niks ofzo']
+            list = ['']
 
             for item in list:
                 listbox.insert(END, item)
@@ -169,8 +178,6 @@ class Homepage(Tk):
 
         listbox.place(x=25, y=100)
         listbox.bind("<Double-1>", klik)
-
-
 
     def __init__(self):
         Tk.__init__(self)

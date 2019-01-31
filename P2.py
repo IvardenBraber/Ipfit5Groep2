@@ -8,6 +8,7 @@ import sqlite3
 import hashlib
 from database_nieuw import DatabaseManager
 
+
 import main_nieuw
 # import LoginCheckV1 #toegevoegd
 # onderaan toegevoegd
@@ -16,6 +17,8 @@ global usernameEntry
 # nieuwe import
 import tkinter.messagebox as tm
 
+
+pass_username = ''
 
 class HOAX(tk.Tk):
 
@@ -131,6 +134,9 @@ class Login(tk.Frame):
                 tm.showerror("Error", "Wrong username or password...")
 
             if errorMessage is True:
+                global pass_username
+                pass_username = username
+                menuV1.Homepage.save_username(username)
                 menuV1.Homepage()
                 controller.close_frame()
 
@@ -150,7 +156,7 @@ class CreateAccount(tk.Frame):
         create_account_label = Label(self, text="You need to fill in all the boxes in order to create an account.", width=64)
         create_account_label.place(x=30, y=85)
 
-        a = Label(self, text="Full Name: ", width=11)
+        a = Label(self, text="Username: ", width=11)
         a.place(x=80, y=130)
 
         c_fullname = Entry(self)
@@ -162,7 +168,7 @@ class CreateAccount(tk.Frame):
         c_email = Entry(self)
         c_email.place(x=185, y=180)
 
-        c = Label(self, text="Username: ", width=10)
+        c = Label(self, text="Full Name: ", width=10)
         c.place(x=80, y=230)
 
         c_username = Entry(self)
