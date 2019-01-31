@@ -11,7 +11,7 @@ from virustotal import *
 from virustotal import virustotal_script
 import virustotal
 
-
+data_dic_virus = []
 
 class EWFImgInfo(pytsk3.Img_Info):
     def __init__(self, ewf_handle):
