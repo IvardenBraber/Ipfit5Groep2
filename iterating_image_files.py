@@ -6,6 +6,11 @@ import os
 import pytsk3
 import pyewf
 import sys
+import hashlib
+from virustotal import *
+from virustotal import virustotal_script
+import virustotal
+
 
 
 class EWFImgInfo(pytsk3.Img_Info):
@@ -140,8 +145,33 @@ class image_stored_list():
                 create = image_stored_list.convert_time(fs_object.info.meta.crtime)
                 change = image_stored_list.convert_time(fs_object.info.meta.ctime)
                 modify = image_stored_list.convert_time(fs_object.info.meta.mtime)
-                data.append(["PARTITION {}".format(part), file_name, file_ext,
-                             f_type, create, change, modify, size, file_path])
+                #data.append([file_name])
+
+
+                sha = hashlib.sha1()
+
+                f = fs.open_meta(inode=fs_object.info.meta.addr)
+                offset = 0
+                BUFF_SIZE = 1024 * 1024
+
+                while offset < size:
+                    available_to_read = min(BUFF_SIZE, size - offset)
+                    data_file = f.read_random(offset, available_to_read)
+                    if not data_file: break
+
+                    offset += len(data_file)
+                    hash = sha.update(data_file)
+                    hash = sha.hexdigest()
+                    hash = str(hash)
+                    data.append(hash)
+                    data.append(file_name)
+                data.append('e1112134b6dcc8bed54e0e34d8ac272795e73d74')
+                data.append('virus.txt')
+                data.append('cbed16069043a0bf3c92fff9a99cccdc ')
+                data.append('virus2.txt')
+                data_dic = {item: data[index + 1] for index, item in enumerate(data) if index % 2 == 0}
+
+
 
                 if f_type == "DIR":
                     parent.append(fs_object.info.name.name)
@@ -156,7 +186,9 @@ class image_stored_list():
             except IOError:
                 pass
         dirs.pop(-1)
-        return data
+        data_dic_virus = virustotal_script.main(data_dic, file_name)
+
+        return data_dic_virus
 
     def convert_time(ts):
         if str(ts) == "0":
@@ -170,9 +202,7 @@ class image_stored_list():
         print("[+] Writing output to {}".format(output))
         with open(output, "w") as csvfile:
             csv_writer = csv.writer(csvfile)
-            headers = ["Partition", "File", "File Ext", "File Type",
-                   "Create Date", "Modify Date", "Change Date", "Size",
-                   "File Path"]
+            headers = ["File", "Hash"]
             csv_writer.writerow(headers)
             for result_list in data:
                 csv_writer.writerows(result_list)
