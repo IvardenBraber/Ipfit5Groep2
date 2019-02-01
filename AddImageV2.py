@@ -16,11 +16,14 @@ def browsefunction(self):
 image_list = [' TEST  ']
 image_loaded = False
 casename = ''
+image_path = ''
 
 class AddImage(Tk):
     def save_casename(new_casename):
         global casename
         casename = new_casename
+
+
 
     def addimagewindow(self):
         gui = self
@@ -57,6 +60,14 @@ class AddImage(Tk):
         ab = Entry(gui, textvariable=self.directorypath)
         ab.place(x=236, y=170)
 
+        global image_inside
+        image_inside = ''
+
+        def set_image_inside():
+            global image_inside
+            image_inside = ab.get()
+
+
         def getimagepath():
             imagepath = ab.get()
             return imagepath
@@ -86,6 +97,7 @@ class AddImage(Tk):
         b = ttk.Button(gui, text="Add Image", width=11,
                        command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), defineImageList(self),
                                         image_loaded_true(), menuV1.Homepage.set_Opencase_False(self), menuV1.Homepage.save_casename(casename),
+                                        set_image_inside(),
                                         self.after(1000, self.destroy(), menuV1.Homepage())]) #, menuV1.Homepage().update)]) #, menuV1.Homepage().update)])
 
         b.place(x=295, y=345)
@@ -110,6 +122,10 @@ class AddImage(Tk):
         def get_image_list(self):
             return image_list
 
+    def get_image_path(self):
+        global image_inside
+        image_path = image_inside
+        return image_path
 
     def __init__(self):
         Tk.__init__(self)

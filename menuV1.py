@@ -66,7 +66,7 @@ class Homepage(Tk):
 
         self.evidence = Menu(menubar, tearoff=0)
         self.evidence.add_command(label="Add Image...", command=lambda: image_loaded_check())
-        self.evidence.add_command(label="Verify Image...", command=lambda: VerifyImageV1.Verify())
+        self.evidence.add_command(label="Verify Image...", command=lambda: [VerifyImageV1.Verify(), self.destroy()])
 
         def image_loaded_check():
             if AddImageV2.image_loaded == True or case_loaded == False:
