@@ -154,26 +154,24 @@ def extension_check(path):
 
 
 def call(evidence_file, hash_list):
-    evidence_file = 'img.dd'
-    hash_list = 'hash_opslag.txt'
     type = extension_check(evidence_file)
+    main(evidence_file, type, hash_list)
 
-
-    if os.path.exists(evidence_file) and \
-        os.path.isfile(evidence_file) and \
-        os.path.exists(hash_list) and \
-        os.path.isfile(hash_list):
-        main(evidence_file, type, hash_list)
-    else:
-        print("[-] Supplied input file {} does not exist or is not a "
-        "file".format(args.EVIDENCE_FILE))
-        sys.exit(1)
+    # if os.path.exists(evidence_file) and \
+    #     os.path.isfile(evidence_file) and \
+    #     os.path.exists(hash_list) and \
+    #     os.path.isfile(hash_list):
+    #
+    # else:
+    #     print("[-] Supplied input file {} does not exist or is not a "
+    #     "file".format(evidence_file))
+    #     sys.exit(1)
     return object_list
 
 def extract(path, hash, output):
     object_img = call(path, hash)
     file: object = object_img[0]
-    imginfo = pytsk3.Img_Info('img.dd')
+    imginfo = pytsk3.Img_Info('C:/Users/calvi/Desktop/image.dd')
     fs = pytsk3.FS_Info(imginfo)
     f = fs.open_meta(inode=file.info.meta.addr)
     offset = 0
@@ -192,7 +190,7 @@ def extract(path, hash, output):
     return file
 
 if __name__ == '__main__':
-    extract('img.dd', 'a2481ef02d687bc07729e14833177983', 'files/')
+    extract('C:/Users/calvi/Desktop/image.dd', 'hash_opslage.txt', 'files/')
 
 
 
