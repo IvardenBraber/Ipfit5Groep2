@@ -212,9 +212,12 @@ class DatabaseManager:
 
     # EVIDENCE
     def createEvidence(self, caseNumber, hashValue, bookmark, benign, notes):
-        self.cursor.execute("INSERT INTO Evidence (E_c_number, hash_value, bookmark, benign, notes) VALUES (?,?,?,?,?)",
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        cur.execute("INSERT INTO Evidence (E_c_number, hash_value, bookmark, benign, notes) VALUES (?,?,?,?,?)",
             (caseNumber, hashValue, bookmark, benign, notes))
-        self.conn.commit()
+        con.commit()
+        con.close()
 
     def getAllEvidenceIds(self, caseId):
         evidence = []

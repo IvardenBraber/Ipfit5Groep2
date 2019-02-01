@@ -5,6 +5,7 @@ from tkinter import filedialog
 
 import menuV1
 import iterating_image_files
+from database_nieuw import DatabaseManager
 
 from menuV1 import *
 
@@ -98,12 +99,18 @@ class AddImage(Tk):
                        command=lambda: [image_opener.open_iterater_image(getimagepath(),'test'), defineImageList(self),
                                         image_loaded_true(), menuV1.Homepage.set_Opencase_False(self), menuV1.Homepage.save_casename(casename),
                                         set_image_inside(),
+                                        set_image_info_db(),
                                         self.after(1000, self.destroy(), menuV1.Homepage())]) #, menuV1.Homepage().update)]) #, menuV1.Homepage().update)])
 
         b.place(x=295, y=345)
 
         c = ttk.Button(gui, text="Go Back", width=7, command=lambda: [menuV1.Homepage(), self.destroy()])
         c.place(x=220, y=345)
+
+
+        def set_image_info_db():
+            DatabaseManager.createEvidence(DatabaseManager, getimagenumber(), 0, 0, getserialnumber(), getdatacarriernumber())
+
 
         global casename
         if casename == '':
